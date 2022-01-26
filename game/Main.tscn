@@ -9,3 +9,5 @@ script = ExtResource( 2 )
 [node name="Tank" parent="." instance=ExtResource( 1 )]
 scale = Vector2( 0.1, 0.1 )
 acceleration_impulse = 0.5
+margin_deceleration_impulse = 1.0
+rotation_speed = 7

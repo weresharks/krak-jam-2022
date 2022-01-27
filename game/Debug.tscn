@@ -37,3 +37,22 @@ text = "123"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="label_distance_vector" type="Label" parent="."]
+margin_top = 31.0
+margin_right = 74.0
+margin_bottom = 45.0
+text = "dist vector"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="distance_vector" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 31.0
+margin_right = 120.0
+margin_bottom = 45.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}

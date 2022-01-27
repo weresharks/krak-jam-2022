@@ -22,9 +22,10 @@ func _ready():
 	$Nimble.update_tank_pos(tank_pos)
 	$Nimble.start(tank_pos + nimble_displacement)
 
-func update_debug():
+func update_debug(distance_vector):
 	$Debug/tank_pos.text = str($Tank.position)
 	$Debug/nimble_pos.text = str($Nimble.position)
+	$Debug/distance_vector.text = str(distance_vector)
 
 func _process(delta):
 	$Nimble.update_tank_pos($Tank.position)
@@ -33,14 +34,14 @@ func _process(delta):
 	
 	var zoom_distance = Vector2.ONE
 	
-	if distance_vector.x >= min_zoom_distance_x and distance_vector.x < max_zoom_distance_x:
-		zoom_distance.x = distance_vector.x / min_zoom_distance_x
+	if distance_vector.x >= min_zoom_distance_x:
+		zoom_distance.x = min(distance_vector.x, max_zoom_distance_x) / min_zoom_distance_x
 
-	if distance_vector.y >= min_zoom_distance_y and distance_vector.y < max_zoom_distance_y:
-		zoom_distance.y = distance_vector.y / min_zoom_distance_y
+	if distance_vector.y >= min_zoom_distance_y:
+		zoom_distance.y = min(distance_vector.y, max_zoom_distance_y) / min_zoom_distance_y
 	
 	var zoom: float = max(zoom_distance.x, zoom_distance.y)
 
 	$Tank/Camera.zoom = Vector2.ONE * zoom
 
-	update_debug()
+	update_debug(distance_vector)

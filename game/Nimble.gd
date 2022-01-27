@@ -6,7 +6,9 @@ export var max_speed: float = 70
 export var min_speed: float = 5
 export var start_speed: float = 30
 export var gravity_base: float = 1000
-export var min_gravity_distance: float = 20*20
+export var min_gravity_distance_2: float = 20*20
+export var longing_base: float = 0.05
+export var longing_distance: float = 300
 export var acceleration_impulse: float = 10
 export var turning_impulse: float = 1
 
@@ -27,22 +29,27 @@ func update_tank_pos(_tank_pos: Vector2):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var tank_dist2 = position.distance_squared_to(tank_pos)
+	var tank_dist = position.distance_to(tank_pos)
+	var tank_dist_2 = tank_dist * tank_dist
 	var gravity_impulse: float = 0
-	if tank_dist2 > min_gravity_distance:
-		gravity_impulse = gravity_base / tank_dist2
+	if tank_dist_2 > min_gravity_distance_2:
+		gravity_impulse = gravity_base / tank_dist_2
 	var gravity = position.direction_to(tank_pos) * gravity_impulse
 	
+	var longing_impulse: float = 0
+	if tank_dist > longing_distance:
+		longing_impulse = longing_base * (tank_dist - longing_distance)
+	
+	var longing = position.direction_to(tank_pos) * longing_impulse\
+	
 	var acceleration = Vector2.ZERO
-	
-	
 	var accelleration_map: Dictionary = calc_acceleration_map(velocity)
 	
 	for key in accelleration_map.keys():
 		if Input.is_action_pressed(key):
 			acceleration += accelleration_map[key]
 
-	velocity += gravity + acceleration
+	velocity += gravity + longing + acceleration
 	
 	var vlen: float = velocity.length()
 	

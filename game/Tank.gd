@@ -21,8 +21,8 @@ var scale_phase: float = 0
 
 var acceleration_map: Dictionary
 
-func init_acceleration_map():	
-	acceleration_map = {
+func get_acceleration_map() -> Dictionary:
+	return {
 		"tank_left": Vector2(-acceleration_impulse, 0),
 		"tank_right": Vector2(acceleration_impulse, 0),
 		"tank_up": Vector2(0, -acceleration_impulse),
@@ -35,7 +35,7 @@ func start(screen_size):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	init_acceleration_map()
+	acceleration_map = get_acceleration_map()
 	base_scale = scale
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

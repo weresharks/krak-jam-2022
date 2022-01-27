@@ -88,6 +88,7 @@ color = Color( 1, 1, 1, 0.172549 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+modulate = Color( 1, 1, 1, 0.270588 )
 motion_scale = Vector2( 0.5, 0.5 )
 motion_mirroring = Vector2( 1000, 750 )
 
@@ -174,6 +175,7 @@ color = Color( 1, 1, 1, 0.172549 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+modulate = Color( 1, 1, 1, 0.160784 )
 motion_scale = Vector2( 0.1, 0.1 )
 motion_mirroring = Vector2( 900, 700 )
 

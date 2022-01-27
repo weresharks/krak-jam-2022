@@ -14,3 +14,6 @@ polygon = PoolVector2Array( 81, 51, 140, 23, 192, 34, 216, 83, 197, 134, 139, 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true

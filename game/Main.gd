@@ -9,9 +9,10 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	$Tank.start(get_viewport().size)
+	$Tank.start(Vector2(3000, 800))
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	$Debug/pos_x.text = str(int($Tank.position.x))
+	$Debug/pos_y.text = str(int($Tank.position.y))
+	

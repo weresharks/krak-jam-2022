@@ -1,0 +1,39 @@
+[gd_scene format=2]
+
+[node name="Debug" type="CanvasLayer"]
+
+[node name="pos_x" type="Label" parent="."]
+margin_left = 16.0
+margin_right = 56.0
+margin_bottom = 14.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_x" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "x"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pos_y" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 14.0
+margin_right = 56.0
+margin_bottom = 28.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_y" type="Label" parent="."]
+margin_top = 14.0
+margin_right = 40.0
+margin_bottom = 28.0
+text = "y"
+__meta__ = {
+"_edit_use_anchors_": false
+}

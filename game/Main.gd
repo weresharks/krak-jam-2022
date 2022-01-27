@@ -24,6 +24,7 @@ export var scene_size: Vector2 = Vector2(3000, 800)
 export var show_debug = true
 
 var tank_pos: Vector2
+var nimble_pos: Vector2
 var mobs: Array = []
 
 func update_debug_visibility():
@@ -47,6 +48,8 @@ func _ready():
 	var nimble_displacement = Vector2(0, nimble_displacement_mag).rotated(rand_range(0, 2 * PI))	
 	$Nimble.update_tank_pos(tank_pos)
 	$Nimble.start(tank_pos + nimble_displacement)
+	
+	nimble_pos = $Nimble.position
 
 	update_debug_visibility()
 	
@@ -60,6 +63,8 @@ func spawn_mob():
 	)
 	add_child(mob)
 	mob.update_tank_pos(tank_pos)
+	mob.update_nimble_pos(nimble_pos)
+	
 
 func update_debug(distance_vector):
 	$Debug/tank_pos.text = str($Tank.position)
@@ -78,6 +83,7 @@ func _process(delta):
 			m.queue_free()
 		else:
 			m.update_tank_pos($Tank.position)
+			m.update_nimble_pos($Nimble.position)
 	
 	var distance_vector: Vector2 = ($Nimble.position - $Tank.position).abs()
 	

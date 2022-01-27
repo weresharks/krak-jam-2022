@@ -3,6 +3,8 @@ extends Area2D
 var is_mob = true
 
 export var tank_detection_range: float = 300
+export var nimble_range: float = 100
+
 export var base_speed: float = 50
 export var speed_variation: float = 10
 
@@ -17,6 +19,10 @@ export var spontaneous_impulse = 2
 
 var tank_detection_range_squared: float
 var tank_pos: Vector2
+
+var nimble_range_squared: float
+var nimble_pos: Vector2
+
 var speed: float
 var velocity: Vector2 = Vector2.ZERO
 var rotation_speed = 0.1 * PI
@@ -32,9 +38,13 @@ func start(pos: Vector2):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	tank_detection_range_squared = tank_detection_range * tank_detection_range
+	nimble_range_squared = nimble_range * nimble_range
 
-func update_tank_pos(_tank_pos: Vector2):
-	tank_pos = _tank_pos
+func update_tank_pos(_pos: Vector2):
+	tank_pos = _pos
+
+func update_nimble_pos(_pos: Vector2):
+	nimble_pos = _pos
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

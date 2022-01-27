@@ -19,8 +19,9 @@ var base_scale: Vector2
 var scale_phase: float = 0
 
 var energy: float = 100
+var max_energy: float = 1000
 var energy_nominal: float = 100
-var energy_usage: float = 0.1
+var energy_usage: float = 0.3
 var energy_damage: float = 20
 var energy_gain: float = 20
 
@@ -43,13 +44,17 @@ func _ready():
 	acceleration_map = get_acceleration_map()
 	base_scale = scale
 
+func update_energy(energy_delta):
+	energy += energy_delta
+	energy = clamp(energy, 0, max_energy)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var acceleration = Vector2.ZERO
 	
 	for key in acceleration_map.keys():
 		if Input.is_action_pressed(key):
-			acceleration += acceleration_map[key]
+			acceleration += acceleration_map[key] * (energy / energy_nominal)
 
 	var vel_len: float = velocity.length()
 
@@ -72,8 +77,9 @@ func _process(delta):
 	if position.y > max_position.y - margin and velocity.y > 0:
 		acceleration.y = - margin_deceleration_impulse
 	
+
 	if acceleration.length() > max_acceleration:
-		acceleration = acceleration.normalized() * max_acceleration * (energy / energy_nominal)
+		acceleration = acceleration.normalized() * max_acceleration
 	
 	velocity += acceleration
 	
@@ -83,7 +89,7 @@ func _process(delta):
 	position += velocity * delta
 	rotation_degrees += rotation_speed * delta
 	
-	energy -= energy_usage * delta
+	update_energy(-energy_usage * delta)
 	
 	scale_phase += scale_speed * delta	
 	scale = base_scale * (1 + scale_magnitude * sin(scale_phase))
@@ -93,6 +99,6 @@ func _on_Tank_area_entered(area: Area2D):
 	if area.get("is_mob"):
 		area.collided = true
 		if area.get("is_good_mob"):
-			energy += energy_gain
+			update_energy(+energy_gain)
 		if area.get("is_bad_mob"):
-			energy -= energy_damage
+			update_energy(-energy_damage)

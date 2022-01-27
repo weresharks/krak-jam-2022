@@ -3,6 +3,8 @@ extends Node
 
 export var initial_nimble_displacement: float = 60
 export var initial_nimble_displacement_variation: float = 20
+export var min_zoom_distance: float = 50
+export var max_zoom_distance: float = 700
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,4 +26,11 @@ func update_debug():
 
 func _process(delta):
 	$Nimble.update_tank_pos($Tank.position)
+	var zoom_distance = $Nimble.position.distance_to($Tank.position)
+	
+	if zoom_distance <= min_zoom_distance:
+		$Tank/Camera.zoom = Vector2.ONE
+	elif zoom_distance < max_zoom_distance:
+		$Tank/Camera.zoom = Vector2.ONE * (zoom_distance / min_zoom_distance)
+
 	update_debug()

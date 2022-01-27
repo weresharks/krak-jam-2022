@@ -5,7 +5,7 @@ var tank_pos: Vector2
 export var max_speed: float = 70
 export var min_speed: float = 5
 export var start_speed: float = 30
-export var gravity_base: float = 800
+export var gravity_base: float = 1000
 export var min_gravity_distance: float = 20*20
 export var acceleration_impulse: float = 10
 export var turning_impulse: float = 1

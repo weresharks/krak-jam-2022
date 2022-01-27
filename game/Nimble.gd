@@ -61,5 +61,5 @@ func calc_acceleration_map(v: Vector2) -> Dictionary:
 		"nimble_left": v.rotated(- half_pi) * turning_impulse,
 		"nimble_right": v.rotated(+ half_pi) * turning_impulse,
 		"nimble_forward": v * acceleration_impulse,
-		"nimble_back": v * (- acceleration_impulse),
+		"nimble_back": v * (- acceleration_impulse / 2),
 	}

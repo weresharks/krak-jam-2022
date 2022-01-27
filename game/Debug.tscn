@@ -94,3 +94,22 @@ text = "123"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="label_energy" type="Label" parent="."]
+margin_top = 79.0
+margin_right = 76.0
+margin_bottom = 93.0
+text = "energy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="energy" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 79.0
+margin_right = 120.0
+margin_bottom = 93.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}

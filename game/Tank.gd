@@ -18,6 +18,12 @@ var max_position: Vector2
 var base_scale: Vector2
 var scale_phase: float = 0
 
+var energy: float = 100
+var energy_nominal: float = 100
+var energy_usage: float = 0.1
+var energy_damage: float = 20
+var energy_gain: float = 20
+
 var acceleration_map: Dictionary
 
 func get_acceleration_map() -> Dictionary:
@@ -67,7 +73,7 @@ func _process(delta):
 		acceleration.y = - margin_deceleration_impulse
 	
 	if acceleration.length() > max_acceleration:
-		acceleration = acceleration.normalized() * max_acceleration
+		acceleration = acceleration.normalized() * max_acceleration * (energy / energy_nominal)
 	
 	velocity += acceleration
 	
@@ -77,6 +83,8 @@ func _process(delta):
 	position += velocity * delta
 	rotation_degrees += rotation_speed * delta
 	
+	energy -= energy_usage * delta
+	
 	scale_phase += scale_speed * delta	
 	scale = base_scale * (1 + scale_magnitude * sin(scale_phase))
 
@@ -84,3 +92,7 @@ func _process(delta):
 func _on_Tank_area_entered(area: Area2D):
 	if area.get("is_mob"):
 		area.collided = true
+		if area.get("is_good_mob"):
+			energy += energy_gain
+		if area.get("is_bad_mob"):
+			energy -= energy_damage

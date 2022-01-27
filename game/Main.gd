@@ -10,7 +10,14 @@ export var max_zoom_distance_y: float = 300
 
 export var num_mobs: int = 100
 export var mob_margin: int = 100
-var mob_scene: PackedScene = load("res://BaseMob.tscn")
+
+var max_mobs = 100
+
+var any_mob_scene: PackedScene = load("res://BaseMob.tscn")
+var good_mob_scene: PackedScene = load("res://GoodMob.tscn")
+var bad_mob_scene: PackedScene = load("res://BadMob.tscn")
+
+var good_mob_probability: float = 0.2
 
 export var scene_size: Vector2 = Vector2(3000, 800)
 
@@ -21,6 +28,8 @@ var mobs: Array = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	$MobTimer.start()
+
 	$Tank.start(scene_size)
 	tank_pos = $Tank.position
 	
@@ -32,20 +41,16 @@ func _ready():
 	$Nimble.update_tank_pos(tank_pos)
 	$Nimble.start(tank_pos + nimble_displacement)
 	
-	spawn_mobs()
-
-func spawn_mobs():
-	for i in range(0, num_mobs):
-		var mob = mob_scene.instance()
-		mobs.append(mob)
-		mob.position = Vector2(
-			rand_range(mob_margin, scene_size.x - mob_margin),
-			rand_range(mob_margin, scene_size.y - mob_margin)
-		)
-		add_child(mob)
-	
-	for m in mobs:
-		m.update_tank_pos(tank_pos)
+func spawn_mob():
+	var mob_scene = bad_mob_scene if randf() > good_mob_probability else good_mob_scene
+	var mob = mob_scene.instance()
+	mobs.append(mob)
+	mob.position = Vector2(
+		rand_range(mob_margin, scene_size.x - mob_margin),
+		rand_range(mob_margin, scene_size.y - mob_margin)
+	)
+	add_child(mob)
+	mob.update_tank_pos(tank_pos)
 
 func update_debug(distance_vector):
 	$Debug/tank_pos.text = str($Tank.position)
@@ -53,6 +58,7 @@ func update_debug(distance_vector):
 	$Debug/distance_vector.text = str(distance_vector)
 	$Debug/mobs_count.text = str(mobs.size())
 	$Debug/nimble_longing.text = str($Nimble.longing)
+	$Debug/energy.text = str($Tank.energy)
 
 func _process(delta):
 	$Nimble.update_tank_pos($Tank.position)
@@ -79,3 +85,8 @@ func _process(delta):
 	$Tank/Camera.zoom = Vector2.ONE * zoom
 
 	update_debug(distance_vector)
+
+
+func _on_MobTimer_timeout():
+	if mobs.size() < max_mobs:
+		spawn_mob()

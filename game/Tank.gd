@@ -2,15 +2,22 @@ extends Node2D
 
 
 export var max_velocity: float = 100
+export var min_velocity: float = 10
+export var max_velocity_spontaneous: float = 20
+export var spontaneous_acceleration_impulse: float = 0.1
 export var acceleration_impulse: float = 5
-export var deceleration_impulse: float = 1
+export var deceleration_impulse: float = 0.3
 export var margin_deceleration_impulse: float = 10
 export var max_acceleration: float = 5
-export var rotation_speed = 3
+export var rotation_speed: float = 3
+export var scale_speed: float = PI / 10
+export var scale_magnitude: float = 0.3
 
 var velocity = Vector2.ZERO
 var margin = 20
 var max_position: Vector2
+var base_scale: Vector2
+var scale_phase: float = 0
 
 var acceleration_map: Dictionary
 
@@ -29,7 +36,7 @@ func start(screen_size):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_acceleration_map()
-
+	base_scale = scale
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -38,7 +45,18 @@ func _process(delta):
 	for key in acceleration_map.keys():
 		if Input.is_action_pressed(key):
 			acceleration += acceleration_map[key]
+
+	var vel_len: float = velocity.length()
+
+	if acceleration.length_squared() == 0 and vel_len < max_velocity_spontaneous:
+		acceleration = Vector2(
+			rand_range(0, spontaneous_acceleration_impulse) - spontaneous_acceleration_impulse / 2, 
+			rand_range(0, spontaneous_acceleration_impulse) - spontaneous_acceleration_impulse / 2
+		)
 	
+	if acceleration.length_squared() == 0 and vel_len > min_velocity:
+		acceleration = - velocity.normalized() * deceleration_impulse
+		
 	if position.x < margin and velocity.x < 0:
 		acceleration.x = margin_deceleration_impulse
 	if position.x > max_position.x - margin and velocity.x > 0:
@@ -59,3 +77,6 @@ func _process(delta):
 	
 	position += velocity * delta
 	rotation_degrees += rotation_speed * delta
+	
+	scale_phase += scale_speed * delta	
+	scale = base_scale * (1 + scale_magnitude * sin(scale_phase))

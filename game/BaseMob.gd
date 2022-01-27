@@ -6,7 +6,7 @@ export var tank_detection_range: float = 300
 export var base_speed: float = 50
 export var speed_variation: float = 10
 
-export var hunting_impulse: float = 0.16
+export var hunting_impulse: float = 0.24
 
 export var slowdown_impulse: float = 0.3
 export var slowdown_cutoff_speed: float = 5

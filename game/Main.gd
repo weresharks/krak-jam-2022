@@ -21,9 +21,16 @@ var good_mob_probability: float = 0.2
 
 export var scene_size: Vector2 = Vector2(3000, 800)
 
+export var show_debug = true
 
 var tank_pos: Vector2
 var mobs: Array = []
+
+func update_debug_visibility():
+	if show_debug:
+		$Debug.scale = Vector2.ONE
+	else:
+		$Debug.scale = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,6 +47,8 @@ func _ready():
 	var nimble_displacement = Vector2(0, nimble_displacement_mag).rotated(rand_range(0, 2 * PI))	
 	$Nimble.update_tank_pos(tank_pos)
 	$Nimble.start(tank_pos + nimble_displacement)
+
+	update_debug_visibility()
 	
 func spawn_mob():
 	var mob_scene = bad_mob_scene if randf() > good_mob_probability else good_mob_scene
@@ -85,6 +94,10 @@ func _process(delta):
 	$Tank/Camera.zoom = Vector2.ONE * zoom
 
 	update_debug(distance_vector)
+	
+	if Input.is_action_just_released("debug_toggle"):
+		show_debug = not show_debug
+		update_debug_visibility()
 
 
 func _on_MobTimer_timeout():

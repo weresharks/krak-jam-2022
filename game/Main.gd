@@ -4,9 +4,9 @@ extends Node
 export var initial_nimble_displacement: float = 60
 export var initial_nimble_displacement_variation: float = 20
 export var min_zoom_distance_x: float = 150
-export var max_zoom_distance_x: float = 1000
+export var max_zoom_distance_x: float = 600
 export var min_zoom_distance_y: float = 75
-export var max_zoom_distance_y: float = 500
+export var max_zoom_distance_y: float = 300
 
 export var num_mobs: int = 100
 export var mob_margin: int = 100
@@ -51,12 +51,18 @@ func update_debug(distance_vector):
 	$Debug/tank_pos.text = str($Tank.position)
 	$Debug/nimble_pos.text = str($Nimble.position)
 	$Debug/distance_vector.text = str(distance_vector)
+	$Debug/mobs_count.text = str(mobs.size())
+	$Debug/nimble_longing.text = str($Nimble.longing)
 
 func _process(delta):
 	$Nimble.update_tank_pos($Tank.position)
 	
 	for m in mobs:
-		m.update_tank_pos($Tank.position)
+		if m.collided:
+			mobs.erase(m)
+			m.queue_free()
+		else:
+			m.update_tank_pos($Tank.position)
 	
 	var distance_vector: Vector2 = ($Nimble.position - $Tank.position).abs()
 	

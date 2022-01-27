@@ -7,12 +7,14 @@ export var min_speed: float = 5
 export var start_speed: float = 30
 export var gravity_base: float = 1000
 export var min_gravity_distance_2: float = 20*20
-export var longing_base: float = 0.05
-export var longing_distance: float = 300
+export var longing_base: float = 0.02
+export var longing_distance: float = 150
 export var acceleration_impulse: float = 10
 export var turning_impulse: float = 1
 
 var velocity: Vector2
+
+var longing: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,7 +42,7 @@ func _process(delta):
 	if tank_dist > longing_distance:
 		longing_impulse = longing_base * (tank_dist - longing_distance)
 	
-	var longing = position.direction_to(tank_pos) * longing_impulse\
+	longing = position.direction_to(tank_pos) * longing_impulse
 	
 	var acceleration = Vector2.ZERO
 	var accelleration_map: Dictionary = calc_acceleration_map(velocity)

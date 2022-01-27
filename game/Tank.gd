@@ -1,5 +1,4 @@
-extends Node2D
-
+extends Area2D
 
 export var max_speed: float = 100
 export var min_speed: float = 10
@@ -80,3 +79,8 @@ func _process(delta):
 	
 	scale_phase += scale_speed * delta	
 	scale = base_scale * (1 + scale_magnitude * sin(scale_phase))
+
+
+func _on_Tank_area_entered(area: Area2D):
+	if area.get("is_mob"):
+		area.collided = true

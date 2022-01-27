@@ -38,10 +38,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="label_distance_vector" type="Label" parent="."]
+[node name="label_nimble_longing" type="Label" parent="."]
 margin_top = 31.0
 margin_right = 74.0
 margin_bottom = 45.0
+text = "longing"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nimble_longing" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 31.0
+margin_right = 120.0
+margin_bottom = 45.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_distance_vector" type="Label" parent="."]
+margin_top = 47.0
+margin_right = 74.0
+margin_bottom = 61.0
 text = "dist vector"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -49,9 +68,28 @@ __meta__ = {
 
 [node name="distance_vector" type="Label" parent="."]
 margin_left = 80.0
-margin_top = 31.0
+margin_top = 47.0
 margin_right = 120.0
-margin_bottom = 45.0
+margin_bottom = 61.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_mobs_count" type="Label" parent="."]
+margin_top = 63.0
+margin_right = 76.0
+margin_bottom = 77.0
+text = "mobs count"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mobs_count" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 63.0
+margin_right = 120.0
+margin_bottom = 77.0
 text = "123"
 __meta__ = {
 "_edit_use_anchors_": false

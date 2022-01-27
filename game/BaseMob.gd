@@ -1,5 +1,6 @@
-extends Node2D
+extends Area2D
 
+var is_mob = true
 
 export var tank_detection_range: float = 300
 export var base_speed: float = 50
@@ -18,6 +19,8 @@ var tank_detection_range_squared: float
 var tank_pos: Vector2
 var speed: float
 var velocity: Vector2 = Vector2.ZERO
+
+var collided: bool = false
 
 
 func start(pos: Vector2):

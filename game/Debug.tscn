@@ -2,38 +2,38 @@
 
 [node name="Debug" type="CanvasLayer"]
 
-[node name="pos_x" type="Label" parent="."]
-margin_left = 16.0
-margin_right = 56.0
+[node name="label_tank_pos" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "tank_pos"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tank_pos" type="Label" parent="."]
+margin_left = 80.0
+margin_right = 120.0
 margin_bottom = 14.0
 text = "123"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="label_x" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "x"
+[node name="label_nimble_pos" type="Label" parent="."]
+margin_top = 15.0
+margin_right = 74.0
+margin_bottom = 29.0
+text = "nimble_pos"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="pos_y" type="Label" parent="."]
-margin_left = 16.0
-margin_top = 14.0
-margin_right = 56.0
-margin_bottom = 28.0
+[node name="nimble_pos" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 15.0
+margin_right = 120.0
+margin_bottom = 29.0
 text = "123"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="label_y" type="Label" parent="."]
-margin_top = 14.0
-margin_right = 40.0
-margin_bottom = 28.0
-text = "y"
 __meta__ = {
 "_edit_use_anchors_": false
 }

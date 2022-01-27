@@ -1,9 +1,9 @@
 extends Node2D
 
 
-export var max_velocity: float = 100
-export var min_velocity: float = 10
-export var max_velocity_spontaneous: float = 20
+export var max_speed: float = 100
+export var min_speed: float = 10
+export var max_speed_spontaneous: float = 20
 export var spontaneous_acceleration_impulse: float = 0.1
 export var acceleration_impulse: float = 5
 export var deceleration_impulse: float = 0.3
@@ -48,13 +48,13 @@ func _process(delta):
 
 	var vel_len: float = velocity.length()
 
-	if acceleration.length_squared() == 0 and vel_len < max_velocity_spontaneous:
+	if acceleration.length_squared() == 0 and vel_len < max_speed_spontaneous:
 		acceleration = Vector2(
 			rand_range(0, spontaneous_acceleration_impulse) - spontaneous_acceleration_impulse / 2, 
 			rand_range(0, spontaneous_acceleration_impulse) - spontaneous_acceleration_impulse / 2
 		)
 	
-	if acceleration.length_squared() == 0 and vel_len > min_velocity:
+	if acceleration.length_squared() == 0 and vel_len > min_speed:
 		acceleration = - velocity.normalized() * deceleration_impulse
 		
 	if position.x < margin and velocity.x < 0:
@@ -72,8 +72,8 @@ func _process(delta):
 	
 	velocity += acceleration
 	
-	if velocity.length() > max_velocity:
-		velocity = velocity.normalized() * max_velocity
+	if velocity.length() > max_speed:
+		velocity = velocity.normalized() * max_speed
 	
 	position += velocity * delta
 	rotation_degrees += rotation_speed * delta

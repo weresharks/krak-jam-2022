@@ -1,15 +1,21 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Tank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Debug.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Nimble.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 
+[node name="Nimble" parent="." instance=ExtResource( 5 )]
+scale = Vector2( 0.21, 0.21 )
+z_index = 2
+
 [node name="Tank" parent="." instance=ExtResource( 1 )]
 scale = Vector2( 0.17, 0.17 )
+z_index = 1
 acceleration_impulse = 0.5
 margin_deceleration_impulse = 1.0
 rotation_speed = 5.0

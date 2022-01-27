@@ -26,6 +26,6 @@ scale_magnitude = 0.1
 [node name="Debug" parent="." instance=ExtResource( 4 )]
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]

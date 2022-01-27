@@ -4,4 +4,5 @@
 [ext_resource path="res://BaseMob.tscn" type="PackedScene" id=2]
 
 [node name="BadMob" instance=ExtResource( 2 )]
+modulate = Color( 0.937255, 0.164706, 0, 1 )
 script = ExtResource( 1 )

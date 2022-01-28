@@ -75,7 +75,17 @@ func play_animation(name: String, priority: int, force: bool = false):
 		$AnimationCore.play(name)
 		$AnimationPupil.play(name)
 		current_anim_priority = priority
-		
+
+func rotate_go_anim(rotation_a: float, rotation_v: float):
+	if $AnimationCloud.animation == "go":
+		$AnimationCore.rotation = rotation_a
+		$AnimationPupil.rotation = rotation_a
+		$AnimationCloud.rotation = rotation_v
+	else:
+		$AnimationCloud.rotation = 0
+		$AnimationCore.rotation = 0
+		$AnimationPupil.rotation = 0
+
 func _on_anim_finished():
 	current_anim_priority = 0
 
@@ -91,6 +101,8 @@ func _process(delta):
 		play_animation("idle", 1)
 	else:
 		play_animation("go", 1)
+	
+	rotate_go_anim(Vector2.UP.angle_to(acceleration), Vector2.UP.angle_to(velocity))
 	
 	var vel_len: float = velocity.length()
 

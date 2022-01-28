@@ -171,19 +171,6 @@ func _process(delta):
 			update_mob(m)
 
 	var distance_vector: Vector2 = ($Nimble.position - $Tank.position).abs()
-	
-	var zoom_distance = Vector2.ONE
-	
-	if distance_vector.x >= min_zoom_distance_x:
-		zoom_distance.x = min(distance_vector.x, max_zoom_distance_x) / min_zoom_distance_x
-
-	if distance_vector.y >= min_zoom_distance_y:
-		zoom_distance.y = min(distance_vector.y, max_zoom_distance_y) / min_zoom_distance_y
-	
-	var zoom: float = max(zoom_distance.x, zoom_distance.y)
-
-	$Tank/Camera.zoom = Vector2.ONE * zoom
-
 	update_debug(distance_vector)
 	
 	if Input.is_action_just_released("debug_toggle"):

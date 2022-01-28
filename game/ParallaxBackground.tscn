@@ -8,83 +8,83 @@ motion_mirroring = Vector2( 1000, 850 )
 
 [node name="Polygon2D" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 85, 93 )
-color = Color( 1, 1, 1, 0.164706 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 97, 338 )
 rotation = 1.15101
-color = Color( 1, 1, 1, 0.0980392 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D3" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 277, 297 )
 rotation = 2.58286
 scale = Vector2( 1.62388, 1.92257 )
-color = Color( 1, 1, 1, 0.231373 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D4" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 117, 532 )
 rotation = 4.47015
 scale = Vector2( 0.811895, 0.764918 )
-color = Color( 1, 1, 1, 0.231373 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D5" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 467, 623 )
 rotation = 5.96044
 scale = Vector2( 1.00386, 1.10806 )
-color = Color( 1, 1, 1, 0.231373 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D6" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 563, 284 )
 rotation = 5.84227
 scale = Vector2( -0.960905, 1.20795 )
-color = Color( 1, 1, 1, 0.164706 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D7" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 590, 512 )
 rotation = 2.80984
 scale = Vector2( 1.75561, 1.19895 )
-color = Color( 1, 1, 1, 0.341176 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D8" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 747, 153 )
 rotation = 4.23893
 scale = Vector2( 2.01155, 1.44193 )
-color = Color( 1, 1, 1, 0.152941 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D9" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 207, 782 )
 rotation = 3.24007
 scale = Vector2( 1.6021, 1.64968 )
-color = Color( 1, 1, 1, 0.384314 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D10" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 889, 774 )
 rotation = 3.84812
 scale = Vector2( 1.67272, 1.92661 )
-color = Color( 1, 1, 1, 0.34902 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D11" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 862, 466 )
 rotation = 6.07019
 scale = Vector2( 1.10142, 1.15789 )
-color = Color( 1, 1, 1, 0.101961 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D12" type="Polygon2D" parent="ParallaxLayer"]
 position = Vector2( 946, 286 )
 rotation = 2.57867
 scale = Vector2( 1.77541, 1.77677 )
-color = Color( 1, 1, 1, 0.172549 )
+color = Color( 0, 0.690196, 0.992157, 0.231373 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
@@ -95,83 +95,83 @@ motion_mirroring = Vector2( 1000, 750 )
 [node name="Polygon2D" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 868, 757 )
 rotation = -1.06796
-color = Color( 1, 1, 1, 0.164706 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 234, 417 )
 rotation = 1.38085
-color = Color( 1, 1, 1, 0.0980392 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D3" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 623, 670 )
 rotation = 1.5149
 scale = Vector2( 1.62388, 1.92257 )
-color = Color( 1, 1, 1, 0.231373 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D4" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 96, 638 )
 rotation = 2.2924
 scale = Vector2( 0.811895, 0.764918 )
-color = Color( 1, 1, 1, 0.231373 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D5" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 349, 112 )
 rotation = 4.89248
 scale = Vector2( 1.00386, 1.10806 )
-color = Color( 1, 1, 1, 0.231373 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D6" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 927, 221 )
 rotation = 4.77431
 scale = Vector2( -0.960905, 1.20795 )
-color = Color( 1, 1, 1, 0.164706 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D7" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 820, 425 )
 rotation = 1.74187
 scale = Vector2( 1.75561, 1.19895 )
-color = Color( 1, 1, 1, 0.341176 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D8" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 328, 713 )
 rotation = 4.04083
 scale = Vector2( 2.01155, 1.44193 )
-color = Color( 1, 1, 1, 0.152941 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D9" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 656, 182 )
 rotation = 2.1721
 scale = Vector2( 1.6021, 1.64968 )
-color = Color( 1, 1, 1, 0.384314 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D10" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 142, 151 )
 rotation = 4.1853
 scale = Vector2( 1.67272, 1.92661 )
-color = Color( 1, 1, 1, 0.34902 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D11" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 889, 605 )
 rotation = 5.00222
 scale = Vector2( 1.10142, 1.15789 )
-color = Color( 1, 1, 1, 0.101961 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D12" type="Polygon2D" parent="ParallaxLayer2"]
 position = Vector2( 448, 406 )
 rotation = 1.5107
 scale = Vector2( 1.77541, 1.77677 )
-color = Color( 1, 1, 1, 0.172549 )
+color = Color( 0.00784314, 0.94902, 0.94902, 0.341176 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
@@ -182,81 +182,81 @@ motion_mirroring = Vector2( 900, 700 )
 [node name="Polygon2D" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 85, 394 )
 rotation = 3.04249
-color = Color( 1, 1, 1, 0.164706 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 234, 417 )
 rotation = 5.4913
-color = Color( 1, 1, 1, 0.0980392 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D3" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 621, 676 )
 rotation = 5.62535
 scale = Vector2( 1.32028, 1.3633 )
-color = Color( 1, 1, 1, 0.231373 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D4" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 96, 638 )
 rotation = 6.40286
 scale = Vector2( 0.811895, 0.764918 )
-color = Color( 1, 1, 1, 0.231373 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D5" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 607, 225 )
 rotation = 9.00293
 scale = Vector2( 1.00386, 1.10806 )
-color = Color( 1, 1, 1, 0.231373 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D6" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 927, 221 )
 rotation = 8.88476
 scale = Vector2( -0.960905, 1.20795 )
-color = Color( 1, 1, 1, 0.164706 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D7" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 820, 425 )
 rotation = 5.85233
 scale = Vector2( 1.75561, 1.19895 )
-color = Color( 1, 1, 1, 0.341176 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D8" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 441, 697 )
 rotation = 8.15128
 scale = Vector2( 2.01155, 1.44193 )
-color = Color( 1, 1, 1, 0.152941 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D9" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 228, 159 )
 rotation = 6.28255
 scale = Vector2( 1.6021, 1.64968 )
-color = Color( 1, 1, 1, 0.384314 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D10" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 953, 769 )
 rotation = 8.29576
 scale = Vector2( 0.877847, 1.36817 )
-color = Color( 1, 1, 1, 0.34902 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D11" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 889, 605 )
 rotation = 9.11268
 scale = Vector2( 1.10142, 1.15789 )
-color = Color( 1, 1, 1, 0.101961 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="Polygon2D12" type="Polygon2D" parent="ParallaxLayer3"]
 position = Vector2( 425, 403 )
 rotation = 5.62116
 scale = Vector2( 1.77541, 1.77677 )
-color = Color( 1, 1, 1, 0.172549 )
+color = Color( 0.164706, 1, 0.72549, 0.101961 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )

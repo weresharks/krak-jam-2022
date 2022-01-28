@@ -132,6 +132,8 @@ func _process(delta):
 	if Input.is_action_just_released("debug_toggle"):
 		show_debug = not show_debug
 		update_debug_visibility()
+	
+	$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
 
 
 func _on_MobTimer_timeout():

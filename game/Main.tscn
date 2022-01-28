@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Tank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Debug.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Nimble.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ScreenShaders.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -54,5 +55,7 @@ rotation = -1.57079
 scale = Vector2( 1.34701, 1 )
 color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( -463, -65, -327, 8, -266, 81, -200, 78, -168, 40, -66, 21, 13, -8, 175, 8, 232, 21, 442, 30, 486, 1, 715, -8, 835, 11, 972, 17, 1248, 1, 1283, 27, 1337, 30, 1362, 30, 1499, 36, 1648, 1, 1715, 21, 1784, 30, 1994, 17, 2007, 24, 2165, 46, 2315, 14, 2283, -122, 2150, -199, 2146, -199, 1965, -430, 1677, -446, 1226, -484, 892, -449, 556, -408, 207, -395, -406, -259 )
+
+[node name="ScreenShaders" parent="." instance=ExtResource( 6 )]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]

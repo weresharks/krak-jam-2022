@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Saturation.gd" type="Script" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float saturation = 1.0;
+
+void fragment() {
+	vec4 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgba;
+    COLOR.rgb = mix(vec3(dot(c.rgb, vec3(0.3, 0.5, 0.1))), c.rgb, saturation);
+	COLOR.a = c.a;
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/saturation = 1.0
+
+[sub_resource type="NoiseTexture" id=3]
+width = 320
+height = 180
+
+[node name="ScreenShaders" type="CanvasLayer"]
+
+[node name="Saturation" type="TextureRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

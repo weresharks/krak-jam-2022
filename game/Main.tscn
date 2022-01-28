@@ -62,5 +62,10 @@ polygon = PoolVector2Array( -463, -65, -327, 8, -266, 81, -200, 78, -168, 40, -6
 
 [node name="ScreenShaders" parent="." instance=ExtResource( 6 )]
 
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

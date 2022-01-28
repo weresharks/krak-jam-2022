@@ -18,7 +18,8 @@ var max_position: Vector2
 var base_scale: Vector2
 var scale_phase: float = 0
 
-var energy: float = 100
+export var start_energy: float = 100
+var energy: float
 var max_energy: float = 1000
 var energy_nominal: float = 100
 var energy_usage: float = 0.5
@@ -38,6 +39,10 @@ func get_acceleration_map() -> Dictionary:
 func start(screen_size):
 	position = screen_size / 2
 	max_position = screen_size
+	
+	energy = start_energy
+	velocity = Vector2.ZERO
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

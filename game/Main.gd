@@ -26,7 +26,7 @@ export var good_mob_probability: float = 0.2
 export var min_mob_spawn_distance: float = 300
 var min_mob_spawn_distance_2: float
 
-export var min_goal_spawn_distance: float = 700
+export var min_goal_spawn_distance: float = 100
 var min_goal_spawn_distance_2: float
 
 
@@ -37,6 +37,8 @@ export var show_debug = false
 var mobs: Array = []
 
 var goal
+
+var game_started = false
 
 
 func find_spawn_point(origin: Vector2, spawn_range_squared: float, margin: float, retries: int = 10):
@@ -105,13 +107,24 @@ func update_debug_visibility():
 	else:
 		$Debug.scale = Vector2.ZERO
 
+func end_game():
+	game_started = false
 
-func new_game():
 	for m in mobs:
 		despawn_mob(m)
 
 	if goal:
 		goal.queue_free()
+	
+	$Tank.hide()
+	$Nimble.hide()
+
+
+func new_game():
+	game_started = true
+	
+	for m in mobs:
+		despawn_mob(m)
 
 	$MobTimer.start()
 
@@ -176,7 +189,9 @@ func _process(delta):
 		show_debug = not show_debug
 		update_debug_visibility()
 	
-	if goal.reached:
+	if not game_started:
+		$ScreenShaders/Saturation.set_saturation(1)
+	elif goal.reached:
 		$ScreenShaders/Saturation.set_saturation(5)
 		if $EndTimer.is_stopped():
 			$EndTimer.start()
@@ -189,4 +204,9 @@ func _on_MobTimer_timeout():
 		spawn_mob()
 
 func _on_EndTimer_timeout():
+	end_game()
+	$StartTimer.start()
+
+
+func _on_StartTimer_timeout():
 	new_game()

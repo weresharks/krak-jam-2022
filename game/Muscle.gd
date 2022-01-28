@@ -1,16 +1,15 @@
 extends ParallaxLayer
 
-var forward = true
-var limit = 4
+export var wobble_magnitude: float = 3
+export var wobble_speed: float = PI / 2
+var wobble_phase: float = 0
+
+var pos: Vector2
+
+func _ready():
+	pos = $Sprite.position
 
 func _process(delta):
-	if forward:
-		$Sprite.position.x += delta
-		$Sprite.position.y += delta
-		if $Sprite.position.x >= limit:
-			forward = false
-	else:
-		$Sprite.position.x -= delta
-		$Sprite.position.y -= delta
-		if $Sprite.position.x <= -limit:
-			forward = true
+	wobble_phase += delta * wobble_speed
+	var wobble_translation: Vector2 = Vector2.UP.rotated(wobble_phase) * wobble_magnitude
+	$Sprite.position = pos + wobble_translation

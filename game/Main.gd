@@ -36,6 +36,12 @@ var viewport_size: Vector2 = Vector2.ZERO
 
 export var show_debug = false
 
+export var base_tank_light_softness: float = 0.4
+export var tank_light_softness_mag: float = 0.1
+export var tank_light_softness_speed: float = PI / 4
+var tank_light_softness_phase: float = 0
+
+
 var mobs: Array = []
 
 var goal
@@ -204,6 +210,11 @@ func _process(delta):
 	
 	var nimble_uv = ($Nimble.position - $Tank.position) / get_viewport().size + Vector2.ONE / 2
 	$ScreenShaders/Light.set_light_position(nimble_uv)
+	$ScreenShaders/Light.set_light2_position(Vector2.ONE * 0.5)
+	$ScreenShaders/Light.set_light2_softness(
+		base_tank_light_softness + sin(tank_light_softness_phase) * tank_light_softness_mag * $Tank.energy_adjustment()
+	)
+	tank_light_softness_phase += tank_light_softness_speed * delta
 
 func init_restart():
 	if $EndTimer.is_stopped():

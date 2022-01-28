@@ -28,26 +28,38 @@ height = 180
 code = "shader_type canvas_item;
 
 uniform vec2 light_position;
-uniform vec4 color : hint_color = vec4(0.505, 0.298, 0.341,1);
+uniform vec2 light2_position;
+uniform vec4 color : hint_color = vec4(0.505, 0.298, 0.341, 1);
 
 uniform float MULTIPLIER = 0.56;
 uniform float SCALE = 0.1;
 uniform float SOFTNESS = 0.45;
+uniform float SCALE2 = 0.1;
+uniform float SOFTNESS2 = 0.45;
+
+float vignette(vec2 uv, vec2 lpos, float scale, float softness) {
+	float val = distance(vec2(uv.x , uv.y * MULTIPLIER), vec2(lpos.x , lpos.y * MULTIPLIER)) / scale;
+	return smoothstep(0.2, softness, val) * color.a;
+}
 
 void fragment(){
-	float val = distance(vec2(UV.x , UV.y * MULTIPLIER), vec2(light_position.x , light_position.y * MULTIPLIER));
-	val = val / SCALE;
-	float vignette = smoothstep(0.2, SOFTNESS, val);
-	COLOR = vec4(color.rgb , vignette );
+	float vig1 = vignette(UV, light_position, SOFTNESS, SCALE);
+	float vig2 = vignette(UV, light2_position, SOFTNESS2, SCALE2);
+	float v = sqrt((1.0 - vig1)*(1.0 - vig1) + (1.0 - vig2)*(1.0 - vig2));
+
+	COLOR = vec4(color.rgb, 1.0 - v);
 }"
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = SubResource( 4 )
-shader_param/light_position = null
-shader_param/color = Color( 0.054902, 0.054902, 0.054902, 0.513726 )
+shader_param/light_position = Vector2( 0.272, 0.212 )
+shader_param/light2_position = Vector2( 0.288, 0.396 )
+shader_param/color = Color( 0, 0, 0, 0.964706 )
 shader_param/MULTIPLIER = 0.56
-shader_param/SCALE = 0.3
-shader_param/SOFTNESS = 2.0
+shader_param/SCALE = 0.316
+shader_param/SOFTNESS = 0.508
+shader_param/SCALE2 = 0.32
+shader_param/SOFTNESS2 = 0.328
 
 [node name="ScreenShaders" type="CanvasLayer"]
 

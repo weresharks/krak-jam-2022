@@ -22,6 +22,7 @@ scale_magnitude = 1.0
 [node name="ParallaxBackground" parent="." instance=ExtResource( 3 )]
 
 [node name="Debug" parent="." instance=ExtResource( 4 )]
+layer = 2
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 3.0

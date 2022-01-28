@@ -26,7 +26,7 @@ export var good_mob_probability: float = 0.2
 export var min_mob_spawn_distance: float = 300
 var min_mob_spawn_distance_2: float
 
-export var min_goal_spawn_distance: float = 700
+export var min_goal_spawn_distance: float = 100
 var min_goal_spawn_distance_2: float
 
 
@@ -106,16 +106,17 @@ func update_debug_visibility():
 		$Debug.scale = Vector2.ZERO
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	randomize()
-	
-	min_mob_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
-	min_goal_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
-	
+func new_game():
+	for m in mobs:
+		despawn_mob(m)
+
+	if goal:
+		goal.queue_free()
+
 	$MobTimer.start()
 
 	$Tank.start(scene_size)
+	$Tank.show()
 	
 	spawn_goal()
 	
@@ -126,8 +127,18 @@ func _ready():
 	var nimble_displacement = Vector2(0, nimble_displacement_mag).rotated(rand_range(0, 2 * PI))	
 	$Nimble.update_tank_pos($Tank.position)
 	$Nimble.start($Tank.position + nimble_displacement)
+	$Nimble.show()
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	randomize()
 	
+	min_mob_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
+	min_goal_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
 	update_debug_visibility()
+	
+	new_game()
 
 
 func _process(delta):
@@ -167,6 +178,8 @@ func _process(delta):
 	
 	if goal.reached:
 		$ScreenShaders/Saturation.set_saturation(5)
+		if $EndTimer.is_stopped():
+			$EndTimer.start()
 	else:
 		$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
 
@@ -175,3 +188,5 @@ func _on_MobTimer_timeout():
 	if mobs.size() < max_mobs:
 		spawn_mob()
 
+func _on_EndTimer_timeout():
+	new_game()

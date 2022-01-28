@@ -11,9 +11,11 @@
 script = ExtResource( 2 )
 
 [node name="Nimble" parent="." instance=ExtResource( 5 )]
+visible = false
 z_index = 2
 
 [node name="Tank" parent="." instance=ExtResource( 1 )]
+visible = false
 z_index = 1
 scale_magnitude = 1.0
 
@@ -23,6 +25,10 @@ scale_magnitude = 1.0
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="EndTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
 [node name="Enclosure" type="Node2D" parent="."]
 z_index = 10
@@ -57,3 +63,4 @@ polygon = PoolVector2Array( -463, -65, -327, 8, -266, 81, -200, 78, -168, 40, -6
 [node name="ScreenShaders" parent="." instance=ExtResource( 6 )]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]

@@ -9,7 +9,7 @@ export var deceleration_impulse: float = 0.3
 export var margin_deceleration_impulse: float = 10
 export var max_acceleration: float = 5
 export var rotation_speed: float = 3
-export var scale_speed: float = PI / 10
+export var scale_speed: float = 0 # PI / 10 # 0 -> disable scaling
 export var scale_magnitude: float = 0.3
 
 var velocity = Vector2.ZERO

@@ -11,13 +11,11 @@
 script = ExtResource( 2 )
 
 [node name="Nimble" parent="." instance=ExtResource( 5 )]
-scale = Vector2( 0.21, 0.21 )
 z_index = 2
 
 [node name="Tank" parent="." instance=ExtResource( 1 )]
-scale = Vector2( 0.17, 0.17 )
 z_index = 1
-scale_magnitude = 0.1
+scale_magnitude = 1.0
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 3 )]
 

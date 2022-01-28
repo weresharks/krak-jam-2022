@@ -17,14 +17,15 @@ var any_mob_scene: PackedScene = load("res://BaseMob.tscn")
 var good_mob_scene: PackedScene = load("res://GoodMob.tscn")
 var bad_mob_scene: PackedScene = load("res://BadMob.tscn")
 
-var good_mob_probability: float = 0.2
+export var good_mob_probability: float = 0.2
+
+export var min_mob_spawn_distance: float = 300
+var min_mob_spawn_distance_2: float
 
 export var scene_size: Vector2 = Vector2(3000, 2000)
 
 export var show_debug = true
 
-var tank_pos: Vector2
-var nimble_pos: Vector2
 var mobs: Array = []
 
 func update_debug_visibility():
@@ -36,34 +37,46 @@ func update_debug_visibility():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	
+	min_mob_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
+	
 	$MobTimer.start()
 
 	$Tank.start(scene_size)
-	tank_pos = $Tank.position
 	
 	var nimble_displacement_mag: float = (
 		initial_nimble_displacement + 
 		rand_range(-initial_nimble_displacement_variation, initial_nimble_displacement_variation)
 	)
 	var nimble_displacement = Vector2(0, nimble_displacement_mag).rotated(rand_range(0, 2 * PI))	
-	$Nimble.update_tank_pos(tank_pos)
-	$Nimble.start(tank_pos + nimble_displacement)
+	$Nimble.update_tank_pos($Tank.position)
+	$Nimble.start($Tank.position + nimble_displacement)
 	
-	nimble_pos = $Nimble.position
-
 	update_debug_visibility()
 	
 func spawn_mob():
 	var mob_scene = bad_mob_scene if randf() > good_mob_probability else good_mob_scene
+	
+	var mob_position: Vector2 = Vector2.ZERO
+	for _i in range(10):
+		var pos = Vector2(
+			rand_range(mob_margin, scene_size.x - mob_margin),
+			rand_range(mob_margin, scene_size.y - mob_margin)
+		)
+		if pos.distance_squared_to($Tank.position) > min_mob_spawn_distance_2:
+			mob_position = pos
+			break
+	
+	# don't spawn if we couldn't find an appropriate position after trying a few times
+	if mob_position == Vector2.ZERO:
+		return
+	
 	var mob = mob_scene.instance()
 	mobs.append(mob)
-	mob.position = Vector2(
-		rand_range(mob_margin, scene_size.x - mob_margin),
-		rand_range(mob_margin, scene_size.y - mob_margin)
-	)
+	mob.position = mob_position	
 	add_child(mob)
-	mob.update_tank_pos(tank_pos)
-	mob.update_nimble_pos(nimble_pos)
+	mob.update_tank_pos($Tank.position)
+	mob.update_nimble_pos($Nimble.position)
 	
 
 func update_debug(distance_vector):

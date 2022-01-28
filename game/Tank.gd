@@ -21,7 +21,7 @@ var scale_phase: float = 0
 var energy: float = 100
 var max_energy: float = 1000
 var energy_nominal: float = 100
-var energy_usage: float = 0.3
+var energy_usage: float = 0.5
 var energy_damage: float = 20
 var energy_gain: float = 20
 

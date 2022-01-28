@@ -26,7 +26,7 @@ export var good_mob_probability: float = 0.2
 export var min_mob_spawn_distance: float = 300
 var min_mob_spawn_distance_2: float
 
-export var min_goal_spawn_distance: float = 100
+export var min_goal_spawn_distance: float = 700
 var min_goal_spawn_distance_2: float
 
 

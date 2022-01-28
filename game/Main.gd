@@ -24,7 +24,7 @@ var min_mob_spawn_distance_2: float
 
 export var scene_size: Vector2 = Vector2(3000, 2000)
 
-export var show_debug = true
+export var show_debug = false
 
 var mobs: Array = []
 

@@ -95,10 +95,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="label_energy" type="Label" parent="."]
+[node name="label_respawns" type="Label" parent="."]
 margin_top = 79.0
 margin_right = 76.0
 margin_bottom = 93.0
+text = "respawns"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="respawns" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 79.0
+margin_right = 120.0
+margin_bottom = 93.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_energy" type="Label" parent="."]
+margin_top = 95.0
+margin_right = 76.0
+margin_bottom = 109.0
 text = "energy"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -106,9 +125,9 @@ __meta__ = {
 
 [node name="energy" type="Label" parent="."]
 margin_left = 80.0
-margin_top = 79.0
+margin_top = 95.0
 margin_right = 120.0
-margin_bottom = 93.0
+margin_bottom = 109.0
 text = "123"
 __meta__ = {
 "_edit_use_anchors_": false

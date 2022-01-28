@@ -8,14 +8,14 @@ export var max_zoom_distance_x: float = 600
 export var min_zoom_distance_y: float = 75
 export var max_zoom_distance_y: float = 300
 
-export var num_mobs: int = 100
-export var mob_margin: int = 100
+export var mob_margin: float = 100
+export var mob_despawn_margin: float = 200
 
 var max_mobs = 100
+var num_respawns = 0
 
-var any_mob_scene: PackedScene = load("res://BaseMob.tscn")
-var good_mob_scene: PackedScene = load("res://GoodMob.tscn")
-var bad_mob_scene: PackedScene = load("res://BadMob.tscn")
+var GoodMob: PackedScene = load("res://GoodMob.tscn")
+var BadMob: PackedScene = load("res://BadMob.tscn")
 
 export var good_mob_probability: float = 0.2
 
@@ -55,7 +55,7 @@ func _ready():
 	update_debug_visibility()
 	
 func spawn_mob():
-	var mob_scene = bad_mob_scene if randf() > good_mob_probability else good_mob_scene
+	var mob_scene = BadMob if randf() > good_mob_probability else GoodMob
 	
 	var mob_position: Vector2 = Vector2.ZERO
 	for _i in range(10):
@@ -71,13 +71,22 @@ func spawn_mob():
 	if mob_position == Vector2.ZERO:
 		return
 	
-	var mob = mob_scene.instance()
-	mobs.append(mob)
-	mob.position = mob_position	
-	add_child(mob)
-	mob.update_tank_pos($Tank.position)
-	mob.update_nimble_pos($Nimble.position)
-	
+	var m = mob_scene.instance()
+	mobs.append(m)
+	m.position = mob_position
+	add_child(m)
+	update_mob(m)
+
+
+func despawn_mob(m):
+	mobs.erase(m)
+	m.queue_free()
+
+
+func update_mob(m):
+	m.update_tank_pos($Tank.position)
+	m.update_nimble_pos($Nimble.position)
+
 
 func update_debug(distance_vector):
 	$Debug/tank_pos.text = str($Tank.position)
@@ -86,18 +95,24 @@ func update_debug(distance_vector):
 	$Debug/mobs_count.text = str(mobs.size())
 	$Debug/nimble_longing.text = str($Nimble.longing)
 	$Debug/energy.text = str($Tank.energy)
+	$Debug/respawns.text = str(num_respawns)
+
 
 func _process(delta):
 	$Nimble.update_tank_pos($Tank.position)
 	
 	for m in mobs:
 		if m.collided:
-			mobs.erase(m)
-			m.queue_free()
+			despawn_mob(m)
+		elif not Rect2(
+			Vector2.ONE * - mob_despawn_margin, scene_size + Vector2.ONE * mob_despawn_margin
+		).has_point(m.position):
+			despawn_mob(m)
+			spawn_mob()
+			num_respawns += 1
 		else:
-			m.update_tank_pos($Tank.position)
-			m.update_nimble_pos($Nimble.position)
-	
+			update_mob(m)
+
 	var distance_vector: Vector2 = ($Nimble.position - $Tank.position).abs()
 	
 	var zoom_distance = Vector2.ONE

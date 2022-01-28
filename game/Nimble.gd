@@ -1,7 +1,8 @@
 extends Node2D
 
 
-var tank_pos: Vector2
+var tank
+
 export var max_speed: float = 200
 export var min_speed: float = 5
 export var start_speed: float = 30
@@ -34,23 +35,24 @@ func start(start_pos: Vector2):
 	position = start_pos
 	velocity = Vector2(0, start_speed).rotated(rand_range(0, 2 * PI))
 
-func update_tank_pos(_tank_pos: Vector2):
-	tank_pos = _tank_pos
+func set_tank(_tank):
+	tank = _tank
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var tank_dist = position.distance_to(tank_pos)
+	var tank_dist = position.distance_to(tank.position)
 	var tank_dist_2 = tank_dist * tank_dist
 	var gravity_impulse: float = 0
 	if tank_dist_2 > min_gravity_distance_2:
 		gravity_impulse = gravity_base / tank_dist_2
-	var gravity = position.direction_to(tank_pos) * gravity_impulse
+	var gravity = position.direction_to(tank.position) * gravity_impulse
 	
 	var longing_impulse: float = 0
 	if tank_dist > longing_distance:
 		longing_impulse = longing_base * (tank_dist - longing_distance)
 	
-	longing = position.direction_to(tank_pos) * longing_impulse
+	longing = position.direction_to(tank.position) * longing_impulse
 	
 	var acceleration = Vector2.ZERO
 	
@@ -60,6 +62,9 @@ func _process(delta):
 	for key in acceleration_map.keys():
 		if Input.is_action_pressed(key):
 			acceleration += acceleration_map[key]
+	
+	if tank.dead:
+		acceleration = Vector2.ZERO
 
 	velocity += gravity + longing + acceleration
 	

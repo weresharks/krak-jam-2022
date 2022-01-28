@@ -87,8 +87,8 @@ func despawn_mob(m):
 
 
 func update_mob(m):
-	m.update_tank_pos($Tank.position)
-	m.update_nimble_pos($Nimble.position)
+	m.set_tank($Tank)
+	m.set_nimble($Nimble)
 
 
 func update_debug(distance_vector):
@@ -138,7 +138,7 @@ func new_game():
 		rand_range(-initial_nimble_displacement_variation, initial_nimble_displacement_variation)
 	)
 	var nimble_displacement = Vector2(0, nimble_displacement_mag).rotated(rand_range(0, 2 * PI))	
-	$Nimble.update_tank_pos($Tank.position)
+	$Nimble.set_tank($Tank)
 	$Nimble.start($Tank.position + nimble_displacement)
 	$Nimble.show()
 
@@ -155,8 +155,6 @@ func _ready():
 
 
 func _process(delta):
-	$Nimble.update_tank_pos($Tank.position)
-	
 	for m in mobs:
 		if m.collided:
 			despawn_mob(m)
@@ -166,8 +164,6 @@ func _process(delta):
 			despawn_mob(m)
 			spawn_mob()
 			num_respawns += 1
-		else:
-			update_mob(m)
 
 	var distance_vector: Vector2 = ($Nimble.position - $Tank.position).abs()
 	
@@ -179,7 +175,12 @@ func _process(delta):
 	if distance_vector.y >= min_zoom_distance_y:
 		zoom_distance.y = min(distance_vector.y, max_zoom_distance_y) / min_zoom_distance_y
 	
-	var zoom: float = max(zoom_distance.x, zoom_distance.y)
+	var zoom: float = 1
+	
+	if not $Tank.dead:
+		zoom = max(zoom_distance.x, zoom_distance.y)
+	else:
+		zoom = 1
 
 	$Tank/Camera.zoom = Vector2.ONE * zoom
 
@@ -193,11 +194,17 @@ func _process(delta):
 		$ScreenShaders/Saturation.set_saturation(1)
 	elif goal.reached:
 		$ScreenShaders/Saturation.set_saturation(5)
-		if $EndTimer.is_stopped():
-			$EndTimer.start()
+		init_restart()
+	elif $Tank.dead:
+		init_restart()
 	else:
 		$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
 
+
+func init_restart():
+	if $EndTimer.is_stopped():
+		$EndTimer.start()	
+	
 
 func _on_MobTimer_timeout():
 	if mobs.size() < max_mobs:

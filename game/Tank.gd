@@ -28,6 +28,10 @@ var energy_gain: float = 20
 
 var acceleration_map: Dictionary
 
+var dead: bool
+var goal_reached: bool
+
+
 func get_acceleration_map() -> Dictionary:
 	return {
 		"tank_left": Vector2(-acceleration_impulse, 0),
@@ -42,6 +46,8 @@ func start(screen_size):
 	
 	energy = start_energy
 	velocity = Vector2.ZERO
+	dead = false
+	goal_reached = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -52,6 +58,8 @@ func _ready():
 func update_energy(energy_delta):
 	energy += energy_delta
 	energy = clamp(energy, 0, max_energy)
+	if energy <= 0:
+		dead = true
 
 func energy_adjustment():
 	var adj = energy / energy_nominal
@@ -59,6 +67,7 @@ func energy_adjustment():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+
 	var acceleration = Vector2.ZERO
 	
 	for key in acceleration_map.keys():
@@ -72,6 +81,10 @@ func _process(delta):
 			rand_range(0, spontaneous_acceleration_impulse) - spontaneous_acceleration_impulse / 2, 
 			rand_range(0, spontaneous_acceleration_impulse) - spontaneous_acceleration_impulse / 2
 		)
+	
+	# don't allow acceleration when dead
+	if dead:
+		acceleration = Vector2.ZERO		
 	
 	if acceleration.length_squared() == 0 and vel_len > min_speed:
 		acceleration = - velocity.normalized() * deceleration_impulse
@@ -116,3 +129,4 @@ func _on_Tank_area_entered(area: Area2D):
 	
 	if area.get("is_goal"):
 		area.reached = true
+		goal_reached = true

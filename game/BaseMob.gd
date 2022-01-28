@@ -18,10 +18,10 @@ export var spontaneous_impulse = 2
 
 
 var tank_detection_range_squared: float
-var tank_pos: Vector2
+var tank
 
 var nimble_range_squared: float
-var nimble_pos: Vector2
+var nimble
 
 var speed: float
 var velocity: Vector2 = Vector2.ZERO
@@ -40,11 +40,11 @@ func _ready():
 	tank_detection_range_squared = tank_detection_range * tank_detection_range
 	nimble_range_squared = nimble_range * nimble_range
 
-func update_tank_pos(_pos: Vector2):
-	tank_pos = _pos
+func set_tank(_tank):
+	tank = _tank
 
-func update_nimble_pos(_pos: Vector2):
-	nimble_pos = _pos
+func set_nimble(_nimble):
+	nimble = _nimble
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,9 +53,9 @@ func _process(delta):
 	var slowdown: Vector2 = Vector2.ZERO
 	var spontaneous: Vector2 = Vector2.ZERO
 
-	var tank_dist_2 = position.distance_squared_to(tank_pos)
+	var tank_dist_2 = position.distance_squared_to(tank.position)
 	if tank_dist_2 < tank_detection_range_squared:
-		var tank_dir = position.direction_to(tank_pos)
+		var tank_dir = position.direction_to(tank.position)
 		hunting = tank_dir * hunting_impulse
 	else:
 		spontaneous = Vector2.UP.rotated(rand_range(0, 2 * PI)) * spontaneous_impulse

@@ -19,7 +19,7 @@ var bad_mob_scene: PackedScene = load("res://BadMob.tscn")
 
 var good_mob_probability: float = 0.2
 
-export var scene_size: Vector2 = Vector2(3000, 800)
+export var scene_size: Vector2 = Vector2(3000, 2000)
 
 export var show_debug = true
 

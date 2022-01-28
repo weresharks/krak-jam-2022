@@ -39,37 +39,6 @@ var mobs: Array = []
 var goal
 
 
-func update_debug_visibility():
-	if show_debug:
-		$Debug.scale = Vector2.ONE
-	else:
-		$Debug.scale = Vector2.ZERO
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	randomize()
-	
-	min_mob_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
-	min_goal_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
-	
-	$MobTimer.start()
-
-	$Tank.start(scene_size)
-	
-	spawn_goal()
-	
-	var nimble_displacement_mag: float = (
-		initial_nimble_displacement + 
-		rand_range(-initial_nimble_displacement_variation, initial_nimble_displacement_variation)
-	)
-	var nimble_displacement = Vector2(0, nimble_displacement_mag).rotated(rand_range(0, 2 * PI))	
-	$Nimble.update_tank_pos($Tank.position)
-	$Nimble.start($Tank.position + nimble_displacement)
-	
-	update_debug_visibility()
-
-
 func find_spawn_point(origin: Vector2, spawn_range_squared: float, margin: float, retries: int = 10):
 	var spawn_point = null
 	
@@ -130,6 +99,37 @@ func update_debug(distance_vector):
 	$Debug/respawns.text = str(num_respawns)
 
 
+func update_debug_visibility():
+	if show_debug:
+		$Debug.scale = Vector2.ONE
+	else:
+		$Debug.scale = Vector2.ZERO
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	randomize()
+	
+	min_mob_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
+	min_goal_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
+	
+	$MobTimer.start()
+
+	$Tank.start(scene_size)
+	
+	spawn_goal()
+	
+	var nimble_displacement_mag: float = (
+		initial_nimble_displacement + 
+		rand_range(-initial_nimble_displacement_variation, initial_nimble_displacement_variation)
+	)
+	var nimble_displacement = Vector2(0, nimble_displacement_mag).rotated(rand_range(0, 2 * PI))	
+	$Nimble.update_tank_pos($Tank.position)
+	$Nimble.start($Tank.position + nimble_displacement)
+	
+	update_debug_visibility()
+
+
 func _process(delta):
 	$Nimble.update_tank_pos($Tank.position)
 	
@@ -174,3 +174,4 @@ func _process(delta):
 func _on_MobTimer_timeout():
 	if mobs.size() < max_mobs:
 		spawn_mob()
+

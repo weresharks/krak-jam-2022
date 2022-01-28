@@ -50,7 +50,7 @@ func update_energy(energy_delta):
 
 func energy_adjustment():
 	var adj = energy / energy_nominal
-	return adj * adj
+	return adj
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -108,3 +108,6 @@ func _on_Tank_area_entered(area: Area2D):
 			update_energy(+energy_gain)
 		if area.get("is_bad_mob"):
 			update_energy(-energy_damage)
+	
+	if area.get("is_goal"):
+		area.reached = true

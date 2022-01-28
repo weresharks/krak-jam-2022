@@ -11,16 +11,24 @@ export var max_zoom_distance_y: float = 300
 export var mob_margin: float = 100
 export var mob_despawn_margin: float = 200
 
+export var goal_margin: float = 20
+
 var max_mobs = 100
 var num_respawns = 0
 
 var GoodMob: PackedScene = load("res://GoodMob.tscn")
 var BadMob: PackedScene = load("res://BadMob.tscn")
 
+var Goal: PackedScene = load("res://Goal.tscn")
+
 export var good_mob_probability: float = 0.2
 
 export var min_mob_spawn_distance: float = 300
 var min_mob_spawn_distance_2: float
+
+export var min_goal_spawn_distance: float = 700
+var min_goal_spawn_distance_2: float
+
 
 export var scene_size: Vector2 = Vector2(3000, 2000)
 
@@ -28,21 +36,28 @@ export var show_debug = false
 
 var mobs: Array = []
 
+var goal
+
+
 func update_debug_visibility():
 	if show_debug:
 		$Debug.scale = Vector2.ONE
 	else:
 		$Debug.scale = Vector2.ZERO
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	
 	min_mob_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
+	min_goal_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
 	
 	$MobTimer.start()
 
 	$Tank.start(scene_size)
+	
+	spawn_goal()
 	
 	var nimble_displacement_mag: float = (
 		initial_nimble_displacement + 
@@ -53,22 +68,39 @@ func _ready():
 	$Nimble.start($Tank.position + nimble_displacement)
 	
 	update_debug_visibility()
+
+
+func find_spawn_point(origin: Vector2, spawn_range_squared: float, margin: float, retries: int = 10):
+	var spawn_point = null
 	
+	for _i in range(retries):
+		var pos = Vector2(
+			rand_range(margin, scene_size.x - margin),
+			rand_range(margin, scene_size.y - margin)
+		)
+		if pos.distance_squared_to(origin) > spawn_range_squared:
+			spawn_point = pos
+			break
+
+	return spawn_point
+
+
+func spawn_goal():
+	var goal_position: Vector2 = find_spawn_point(
+		$Tank.position, min_goal_spawn_distance_2, goal_margin, 100
+	)
+
+	goal = Goal.instance()
+	goal.position = goal_position
+	add_child(goal)
+
+
 func spawn_mob():
 	var mob_scene = BadMob if randf() > good_mob_probability else GoodMob
-	
-	var mob_position: Vector2 = Vector2.ZERO
-	for _i in range(10):
-		var pos = Vector2(
-			rand_range(mob_margin, scene_size.x - mob_margin),
-			rand_range(mob_margin, scene_size.y - mob_margin)
-		)
-		if pos.distance_squared_to($Tank.position) > min_mob_spawn_distance_2:
-			mob_position = pos
-			break
-	
+	var mob_position = find_spawn_point($Tank.position, min_mob_spawn_distance_2, mob_margin)
+		
 	# don't spawn if we couldn't find an appropriate position after trying a few times
-	if mob_position == Vector2.ZERO:
+	if not mob_position:
 		return
 	
 	var m = mob_scene.instance()
@@ -133,7 +165,10 @@ func _process(delta):
 		show_debug = not show_debug
 		update_debug_visibility()
 	
-	$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
+	if goal.reached:
+		$ScreenShaders/Saturation.set_saturation(5)
+	else:
+		$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
 
 
 func _on_MobTimer_timeout():

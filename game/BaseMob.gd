@@ -7,11 +7,11 @@ export var nimble_range: float = 100
 
 export var base_speed: float = 25
 export var speed_variation: float = 10
-export var max_speed: float = 150
+export var max_speed: float = 110
 
 export var hunting_impulse: float = 0.24
 
-export var slowdown_impulse: float = 0.3
+export var slowdown_impulse: float = 0.5
 export var slowdown_cutoff_speed: float = 5
 
 export var max_spontaneous_speed: float = 10

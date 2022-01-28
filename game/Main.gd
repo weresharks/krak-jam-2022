@@ -7,6 +7,7 @@ export var min_zoom_distance_x: float = 150
 export var max_zoom_distance_x: float = 600
 export var min_zoom_distance_y: float = 75
 export var max_zoom_distance_y: float = 300
+export var is_zoom_enabled: bool = false
 
 export var mob_margin: float = 100
 export var mob_despawn_margin: float = 200
@@ -178,7 +179,7 @@ func _process(delta):
 	
 	var zoom: float = 1
 	
-	if not $Tank.dead:
+	if not $Tank.dead and is_zoom_enabled:
 		zoom = max(zoom_distance.x, zoom_distance.y)
 	else:
 		zoom = 1
@@ -201,8 +202,7 @@ func _process(delta):
 	else:
 		$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
 	
-	var nimble_rel_pos = $Nimble.position / get_viewport().size
-	var nimble_uv = nimble_rel_pos - Vector2(int(nimble_rel_pos.x), int(nimble_rel_pos.y))
+	var nimble_uv = ($Nimble.position - $Tank.position) / get_viewport().size + Vector2.ONE / 2
 	$ScreenShaders/Light.set_light_position(nimble_uv)
 
 func init_restart():

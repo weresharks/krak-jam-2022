@@ -60,20 +60,38 @@ func update_energy(energy_delta):
 	energy = clamp(energy, 0, max_energy)
 	if energy <= 0:
 		dead = true
+		play_animation("death_decay", 3, true)
 
 func energy_adjustment():
 	var adj = energy / energy_nominal
 	return adj
+	
+var current_anim_priority: int = 0
+	
+func play_animation(name: String, priority: int, force: bool = false):
+	var current_anim = $AnimationCloud.animation
+	if (name != current_anim and priority >= current_anim_priority) or force:
+		$AnimationCloud.play(name)
+		$AnimationCore.play(name)
+		$AnimationPupil.play(name)
+		current_anim_priority = priority
+		
+func _on_anim_finished():
+	current_anim_priority = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
 	var acceleration = Vector2.ZERO
 	
 	for key in acceleration_map.keys():
 		if Input.is_action_pressed(key):
 			acceleration += acceleration_map[key]
-
+			
+	if acceleration == Vector2.ZERO:
+		play_animation("idle", 1)
+	else:
+		play_animation("go", 1)
+	
 	var vel_len: float = velocity.length()
 
 	if acceleration.length_squared() == 0 and vel_len < max_speed_spontaneous:
@@ -84,7 +102,7 @@ func _process(delta):
 	
 	# don't allow acceleration when dead
 	if dead:
-		acceleration = Vector2.ZERO		
+		acceleration = Vector2.ZERO
 	
 	if acceleration.length_squared() == 0 and vel_len > min_speed:
 		acceleration = - velocity.normalized() * deceleration_impulse
@@ -124,8 +142,10 @@ func _on_Tank_area_entered(area: Area2D):
 		area.collided = true
 		if area.get("is_good_mob"):
 			update_energy(+energy_gain)
+			play_animation("power_up", 3, true)
 		if area.get("is_bad_mob"):
 			update_energy(-energy_damage)
+			play_animation("damage", 3, true)
 	
 	if area.get("is_goal"):
 		area.reached = true

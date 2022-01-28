@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Tank.gd" type="Script" id=1]
-[ext_resource path="res://sprites/PROP_tank_big.png" type="Texture" id=2]
+[ext_resource path="res://sprites/tank/tank_pupil.res" type="SpriteFrames" id=2]
+[ext_resource path="res://sprites/tank/tank_cloud.res" type="SpriteFrames" id=3]
+[ext_resource path="res://sprites/tank/tank_core.res" type="SpriteFrames" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 63.7887
+radius = 18.0278
 
 [node name="Tank" type="Area2D"]
 script = ExtResource( 1 )
@@ -22,7 +24,20 @@ shape = SubResource( 1 )
 [node name="Camera" type="Camera2D" parent="."]
 current = true
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+[node name="AnimationCloud" type="AnimatedSprite" parent="."]
+frames = ExtResource( 3 )
+animation = "power_up"
+frame = 4
+
+[node name="AnimationCore" type="AnimatedSprite" parent="."]
+frames = ExtResource( 4 )
+animation = "power_up"
+frame = 4
+
+[node name="AnimationPupil" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "power_up"
+frame = 4
 
 [connection signal="area_entered" from="." to="." method="_on_Tank_area_entered"]
+[connection signal="animation_finished" from="AnimationCloud" to="." method="_on_anim_finished"]

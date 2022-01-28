@@ -31,6 +31,7 @@ var min_goal_spawn_distance_2: float
 
 
 export var scene_size: Vector2 = Vector2(3000, 2000)
+var viewport_size: Vector2 = Vector2.ZERO
 
 export var show_debug = false
 
@@ -197,7 +198,10 @@ func _process(delta):
 			$EndTimer.start()
 	else:
 		$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
-
+	
+	var nimble_rel_pos = $Nimble.position / get_viewport().size
+	var nimble_uv = nimble_rel_pos - Vector2(int(nimble_rel_pos.x), int(nimble_rel_pos.y))
+	$ScreenShaders/Light.set_light_position(nimble_uv)
 
 func _on_MobTimer_timeout():
 	if mobs.size() < max_mobs:

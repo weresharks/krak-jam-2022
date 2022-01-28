@@ -25,7 +25,6 @@ scale_magnitude = 1.0
 layer = 2
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 3.0
 
 [node name="EndTimer" type="Timer" parent="."]
 wait_time = 5.0

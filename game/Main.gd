@@ -27,7 +27,7 @@ export var good_mob_probability: float = 0.2
 export var min_mob_spawn_distance: float = 300
 var min_mob_spawn_distance_2: float
 
-export var min_goal_spawn_distance: float = 100
+export var min_goal_spawn_distance: float = 600
 var min_goal_spawn_distance_2: float
 
 
@@ -40,6 +40,8 @@ export var base_tank_light_softness: float = 0.4
 export var tank_light_softness_mag: float = 0.1
 export var tank_light_softness_speed: float = PI / 4
 var tank_light_softness_phase: float = 0
+
+var goal_reached_brightening: float = 1
 
 
 var mobs: Array = []
@@ -107,7 +109,8 @@ func update_debug(distance_vector):
 	$Debug/nimble_longing.text = str($Nimble.longing)
 	$Debug/energy.text = str($Tank.energy)
 	$Debug/respawns.text = str(num_respawns)
-
+	if is_instance_valid(goal):
+		$Debug/goal_pos.text = str(goal.position)
 
 func update_debug_visibility():
 	if show_debug:
@@ -130,6 +133,7 @@ func end_game():
 
 func new_game():
 	game_started = true
+	$ScreenShaders/Light.modulate.a = 1
 	
 	for m in mobs:
 		despawn_mob(m)
@@ -149,6 +153,10 @@ func new_game():
 	$Nimble.set_tank($Tank)
 	$Nimble.start($Tank.position + nimble_displacement)
 	$Nimble.show()
+
+
+func goal_reached() -> bool:
+	return is_instance_valid(goal) and goal.reached
 
 
 # Called when the node enters the scene tree for the first time.
@@ -199,14 +207,16 @@ func _process(delta):
 		update_debug_visibility()
 	
 	if not game_started:
-		$ScreenShaders/Saturation.set_saturation(1)
-	elif goal.reached:
-		$ScreenShaders/Saturation.set_saturation(5)
-		init_restart()
-	elif $Tank.dead:
-		init_restart()
+		if goal_reached():
+			$ScreenShaders/Saturation.set_saturation(5)
+			
+		else:
+			$ScreenShaders/Saturation.set_saturation(1)
 	else:
-		$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
+		if goal_reached() or $Tank.dead:
+			init_restart()
+		else:
+			$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
 	
 	var nimble_uv = ($Nimble.position - $Tank.position) / get_viewport().size + Vector2.ONE / 2
 	$ScreenShaders/Light.set_light_position(nimble_uv)
@@ -215,8 +225,12 @@ func _process(delta):
 		base_tank_light_softness + sin(tank_light_softness_phase) * tank_light_softness_mag * $Tank.energy_adjustment()
 	)
 	tank_light_softness_phase += tank_light_softness_speed * delta
-
+	
+	if goal_reached():
+		$ScreenShaders/Light.modulate.a -= goal_reached_brightening * delta
+	
 func init_restart():
+	game_started = false
 	if $EndTimer.is_stopped():
 		$EndTimer.start()	
 	

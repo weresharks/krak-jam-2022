@@ -6,7 +6,7 @@
 [ext_resource path="res://sprites/tank/tank_core.res" type="SpriteFrames" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 18.0278
+radius = 15.0
 
 [node name="Tank" type="Area2D"]
 script = ExtResource( 1 )

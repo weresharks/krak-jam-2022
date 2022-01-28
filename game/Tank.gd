@@ -8,7 +8,6 @@ export var acceleration_impulse: float = 3
 export var deceleration_impulse: float = 0.3
 export var margin_deceleration_impulse: float = 10
 export var max_acceleration: float = 5
-export var rotation_speed: float = 3
 export var scale_speed: float = 0 # PI / 10 # 0 -> disable scaling
 export var scale_magnitude: float = 0.3
 
@@ -20,9 +19,9 @@ var scale_phase: float = 0
 
 export var start_energy: float = 100
 var energy: float
-var max_energy: float = 1000
+var max_energy: float = 200
 var energy_nominal: float = 100
-var energy_usage: float = 0.5
+var energy_usage: float = 0.2
 var energy_damage: float = 20
 var energy_gain: float = 20
 
@@ -141,7 +140,6 @@ func _process(delta):
 		velocity = velocity.normalized() * max_current_speed
 	
 	position += velocity * delta
-	#rotation_degrees += rotation_speed * delta
 	
 	update_energy(-energy_usage * delta)
 	

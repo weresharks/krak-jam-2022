@@ -132,3 +132,22 @@ text = "123"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="label_goal_pos" type="Label" parent="."]
+margin_top = 111.0
+margin_right = 76.0
+margin_bottom = 125.0
+text = "goal_pos"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="goal_pos" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 111.0
+margin_right = 120.0
+margin_bottom = 125.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}

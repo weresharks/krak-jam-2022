@@ -5,8 +5,9 @@ var is_mob = true
 export var tank_detection_range: float = 300
 export var nimble_range: float = 100
 
-export var base_speed: float = 50
+export var base_speed: float = 25
 export var speed_variation: float = 10
+export var max_speed: float = 150
 
 export var hunting_impulse: float = 0.24
 
@@ -63,7 +64,10 @@ func _process(delta):
 		if velocity.length() >= slowdown_cutoff_speed:
 			slowdown = - velocity.normalized() * slowdown_impulse
 	
-	velocity = velocity + hunting + slowdown + spontaneous
+	velocity += hunting + slowdown + spontaneous
+	
+	if velocity.length() > max_speed:
+		velocity = velocity.normalized() * max_speed
 	
 	position += velocity * delta
 	rotation += rotation_speed * delta

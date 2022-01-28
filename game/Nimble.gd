@@ -2,7 +2,7 @@ extends Node2D
 
 
 var tank_pos: Vector2
-export var max_speed: float = 100
+export var max_speed: float = 200
 export var min_speed: float = 5
 export var start_speed: float = 30
 export var gravity_base: float = 1000
@@ -16,15 +16,23 @@ var velocity: Vector2
 
 var longing: Vector2
 
+var acceleration_map: Dictionary
+
+func get_acceleration_map() -> Dictionary:
+	return {
+		"nimble_left": Vector2(-acceleration_impulse, 0),
+		"nimble_right": Vector2(acceleration_impulse, 0),
+		"nimble_up": Vector2(0, -acceleration_impulse),
+		"nimble_down": Vector2(0, acceleration_impulse),
+	}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	acceleration_map = get_acceleration_map()
 
 func start(start_pos: Vector2):
 	position = start_pos
 	velocity = Vector2(0, start_speed).rotated(rand_range(0, 2 * PI))
-	#velocity = Vector2(0, 0)
 
 func update_tank_pos(_tank_pos: Vector2):
 	tank_pos = _tank_pos
@@ -45,11 +53,13 @@ func _process(delta):
 	longing = position.direction_to(tank_pos) * longing_impulse
 	
 	var acceleration = Vector2.ZERO
-	var accelleration_map: Dictionary = calc_acceleration_map(velocity)
 	
-	for key in accelleration_map.keys():
+	# needed for turning/longitudal aka tank aka driving acceleration controls
+#	var acceleration_map: Dictionary = calc_driving_controls_map(velocity)
+	
+	for key in acceleration_map.keys():
 		if Input.is_action_pressed(key):
-			acceleration += accelleration_map[key]
+			acceleration += acceleration_map[key]
 
 	velocity += gravity + longing + acceleration
 	
@@ -63,7 +73,8 @@ func _process(delta):
 	position += velocity * delta
 	rotation = Vector2(0, -1).angle_to(velocity)
 
-func calc_acceleration_map(v: Vector2) -> Dictionary:
+
+func calc_driving_controls_map(v: Vector2) -> Dictionary:
 	var half_pi: float = PI / 2
 	v = v.normalized()	
 	return {

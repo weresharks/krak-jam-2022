@@ -48,13 +48,17 @@ func update_energy(energy_delta):
 	energy += energy_delta
 	energy = clamp(energy, 0, max_energy)
 
+func energy_adjustment():
+	var adj = energy / energy_nominal
+	return adj * adj
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var acceleration = Vector2.ZERO
 	
 	for key in acceleration_map.keys():
 		if Input.is_action_pressed(key):
-			acceleration += acceleration_map[key] * (energy / energy_nominal)
+			acceleration += acceleration_map[key]
 
 	var vel_len: float = velocity.length()
 
@@ -67,14 +71,14 @@ func _process(delta):
 	if acceleration.length_squared() == 0 and vel_len > min_speed:
 		acceleration = - velocity.normalized() * deceleration_impulse
 		
-	if position.x < margin and velocity.x < 0:
+	if position.x < margin:
 		acceleration.x = margin_deceleration_impulse
-	if position.x > max_position.x - margin and velocity.x > 0:
+	if position.x > max_position.x - margin:
 		acceleration.x = - margin_deceleration_impulse
 	
-	if position.y < margin and velocity.y < 0:
+	if position.y < margin:
 		acceleration.y = margin_deceleration_impulse
-	if position.y > max_position.y - margin and velocity.y > 0:
+	if position.y > max_position.y - margin:
 		acceleration.y = - margin_deceleration_impulse
 	
 
@@ -83,15 +87,17 @@ func _process(delta):
 	
 	velocity += acceleration
 	
-	if velocity.length() > max_speed:
-		velocity = velocity.normalized() * max_speed
+	var max_current_speed = max_speed * energy_adjustment()
+	
+	if velocity.length() > max_current_speed:
+		velocity = velocity.normalized() * max_current_speed
 	
 	position += velocity * delta
 	rotation_degrees += rotation_speed * delta
 	
 	update_energy(-energy_usage * delta)
 	
-	scale_phase += scale_speed * delta	
+	scale_phase += scale_speed * delta
 	scale = base_scale * (1 + scale_magnitude * sin(scale_phase))
 
 

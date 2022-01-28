@@ -16,9 +16,6 @@ z_index = 2
 [node name="Tank" parent="." instance=ExtResource( 1 )]
 scale = Vector2( 0.17, 0.17 )
 z_index = 1
-acceleration_impulse = 0.3
-margin_deceleration_impulse = 1.0
-rotation_speed = 5.0
 scale_magnitude = 0.1
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 3 )]
@@ -32,7 +29,7 @@ wait_time = 3.0
 z_index = 10
 
 [node name="Polygon2D" type="Polygon2D" parent="Enclosure"]
-position = Vector2( 160.667, -49 )
+position = Vector2( 161, -49 )
 scale = Vector2( 1.34701, 1 )
 color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( -463, -65, -327, 8, -266, 81, -200, 78, -168, 40, -66, 21, 13, -8, 175, 8, 232, 21, 442, 30, 486, 1, 715, -8, 835, 11, 972, 17, 1248, 1, 1283, 27, 1337, 30, 1362, 30, 1499, 36, 1648, 1, 1715, 21, 1784, 30, 1994, 17, 2007, 24, 2165, 46, 2315, 14, 2283, -122, 2150, -199, 2146, -199, 1965, -430, 1677, -446, 1226, -484, 892, -449, 556, -408, 207, -395, -406, -259 )

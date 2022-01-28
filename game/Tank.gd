@@ -111,7 +111,7 @@ func _process(delta):
 		velocity = velocity.normalized() * max_current_speed
 	
 	position += velocity * delta
-	rotation_degrees += rotation_speed * delta
+	#rotation_degrees += rotation_speed * delta
 	
 	update_energy(-energy_usage * delta)
 	

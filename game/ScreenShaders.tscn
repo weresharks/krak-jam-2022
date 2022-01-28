@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Saturation.gd" type="Script" id=1]
+[ext_resource path="res://Light.gd" type="Script" id=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -23,6 +24,31 @@ shader_param/saturation = 1.0
 width = 320
 height = 180
 
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform vec2 light_position;
+uniform vec4 color : hint_color = vec4(0.505, 0.298, 0.341,1);
+
+uniform float MULTIPLIER = 0.56;
+uniform float SCALE = 0.1;
+uniform float SOFTNESS = 0.45;
+
+void fragment(){
+	float val = distance(vec2(UV.x , UV.y * MULTIPLIER), vec2(light_position.x , light_position.y * MULTIPLIER));
+	val = val / SCALE;
+	float vignette = smoothstep(0.2, SOFTNESS, val);
+	COLOR = vec4(color.rgb , vignette );
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/light_position = null
+shader_param/color = Color( 0.054902, 0.054902, 0.054902, 0.513726 )
+shader_param/MULTIPLIER = 0.56
+shader_param/SCALE = 0.3
+shader_param/SOFTNESS = 2.0
+
 [node name="ScreenShaders" type="CanvasLayer"]
 
 [node name="Saturation" type="TextureRect" parent="."]
@@ -31,6 +57,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = SubResource( 3 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light" type="TextureRect" parent="."]
+material = SubResource( 5 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 3 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

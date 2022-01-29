@@ -36,9 +36,9 @@ var acceleration_map: Dictionary
 var dead: bool
 var goal_reached: bool
 
-export var damageSound: AudioStream
 export var goalReachedSound: AudioStream
-export var powerUpSound: AudioStream
+export (Array, AudioStream) var damageSounds
+export (Array, AudioStream) var powerUpSounds
 
 
 func get_acceleration_map() -> Dictionary:
@@ -179,11 +179,11 @@ func _on_Tank_area_entered(area: Area2D):
 		if area.get("is_good_mob"):
 			update_energy(+energy_gain)
 			play_animation("power_up", 3, true)
-			$SoundPlayer.play_sound(powerUpSound)
+			$SoundPlayer.play_random_sound(powerUpSounds, true)
 		if area.get("is_bad_mob"):
 			update_energy(-energy_damage)
 			play_animation("damage", 3, true)
-			$SoundPlayer.play_sound(damageSound)
+			$SoundPlayer.play_random_sound(damageSounds, true)
 	
 	if area.get("is_goal"):
 		area.reached = true

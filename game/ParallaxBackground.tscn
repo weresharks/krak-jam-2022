@@ -295,11 +295,18 @@ color = Color( 0.34902, 0.152941, 0.458824, 0.733333 )
 polygon = PoolVector2Array( -19, -39, 7, -30, 41, -33, 49, -7, 36, 12, 54, 37, 34, 42, -3, 70, -39, 43, -41, 7, -23, -4, -29, -23 )
 
 [node name="ParallaxLayer7" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 320, 180 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="ParallaxLayer7"]
 frames = ExtResource( 6 )
+frame = 9
+playing = true
 
 [node name="ParallaxLayer8" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.95, 0.95 )
+motion_mirroring = Vector2( 320, 180 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="ParallaxLayer8"]
 frames = ExtResource( 7 )
+frame = 14
+playing = true

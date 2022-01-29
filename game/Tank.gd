@@ -39,6 +39,7 @@ var goal_reached: bool
 export var goalReachedSound: AudioStream
 export (Array, AudioStream) var damageSounds
 export (Array, AudioStream) var powerUpSounds
+export var max_cutoff_freq: float = 10_000
 
 
 func get_acceleration_map() -> Dictionary:
@@ -72,22 +73,27 @@ func update_energy(energy_delta):
 		if $AnimationCloud.animation != "death_decay":
 			play_animation("death_decay", 3, true)
 	else:
-		update_energy_visuals()
-	
+		update_energy_feedback()
 
 func energy_adjustment():
 	var adj = energy / energy_nominal
 	return adj
 
-
-func update_energy_visuals():
+func update_energy_feedback():
 	var ea = energy_adjustment()
 	var scale = clamp(lerp(energy_scaling_min, 1.0, ea), 0, 1)
 	var opacity = clamp(lerp(energy_opacity_min, 1.0, ea), 0, 1)
 	
+	update_music_cutoff(scale)
+	
 	$AnimationCore.scale = Vector2.ONE * scale
 	$AnimationPupil.scale = Vector2.ONE * scale
 	$AnimationCore.modulate.a = opacity
+	
+func update_music_cutoff(scale: float):
+	var bus_id = AudioServer.get_bus_index("Music")
+	var low_pass_filter = AudioServer.get_bus_effect(bus_id, 0)
+	low_pass_filter.set_cutoff(max_cutoff_freq * scale)
 	
 var current_anim_priority: int = 0
 	

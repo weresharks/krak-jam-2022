@@ -20,9 +20,9 @@ __meta__ = {
 }
 
 [node name="label_nimble_pos" type="Label" parent="."]
-margin_top = 15.0
+margin_top = 13.0
 margin_right = 74.0
-margin_bottom = 29.0
+margin_bottom = 27.0
 text = "nimble_pos"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -30,18 +30,18 @@ __meta__ = {
 
 [node name="nimble_pos" type="Label" parent="."]
 margin_left = 80.0
-margin_top = 15.0
+margin_top = 13.0
 margin_right = 120.0
-margin_bottom = 29.0
+margin_bottom = 27.0
 text = "123"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="label_nimble_longing" type="Label" parent="."]
-margin_top = 31.0
+margin_top = 27.0
 margin_right = 74.0
-margin_bottom = 45.0
+margin_bottom = 41.0
 text = "longing"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -49,18 +49,18 @@ __meta__ = {
 
 [node name="nimble_longing" type="Label" parent="."]
 margin_left = 80.0
-margin_top = 31.0
+margin_top = 27.0
 margin_right = 120.0
-margin_bottom = 45.0
+margin_bottom = 41.0
 text = "123"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="label_distance_vector" type="Label" parent="."]
-margin_top = 47.0
+margin_top = 41.0
 margin_right = 74.0
-margin_bottom = 61.0
+margin_bottom = 55.0
 text = "dist vector"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -68,18 +68,18 @@ __meta__ = {
 
 [node name="distance_vector" type="Label" parent="."]
 margin_left = 80.0
-margin_top = 47.0
+margin_top = 41.0
 margin_right = 120.0
-margin_bottom = 61.0
+margin_bottom = 55.0
 text = "123"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="label_mobs_count" type="Label" parent="."]
-margin_top = 63.0
+margin_top = 55.0
 margin_right = 76.0
-margin_bottom = 77.0
+margin_bottom = 69.0
 text = "mobs count"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -87,18 +87,18 @@ __meta__ = {
 
 [node name="mobs_count" type="Label" parent="."]
 margin_left = 80.0
-margin_top = 63.0
+margin_top = 55.0
 margin_right = 120.0
-margin_bottom = 77.0
+margin_bottom = 69.0
 text = "123"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="label_respawns" type="Label" parent="."]
-margin_top = 79.0
+margin_top = 69.0
 margin_right = 76.0
-margin_bottom = 93.0
+margin_bottom = 83.0
 text = "respawns"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -106,18 +106,18 @@ __meta__ = {
 
 [node name="respawns" type="Label" parent="."]
 margin_left = 80.0
-margin_top = 79.0
+margin_top = 69.0
 margin_right = 120.0
-margin_bottom = 93.0
+margin_bottom = 83.0
 text = "123"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="label_energy" type="Label" parent="."]
-margin_top = 95.0
+margin_top = 83.0
 margin_right = 76.0
-margin_bottom = 109.0
+margin_bottom = 97.0
 text = "energy"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -125,18 +125,18 @@ __meta__ = {
 
 [node name="energy" type="Label" parent="."]
 margin_left = 80.0
-margin_top = 95.0
+margin_top = 83.0
 margin_right = 120.0
-margin_bottom = 109.0
+margin_bottom = 97.0
 text = "123"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="label_goal_pos" type="Label" parent="."]
-margin_top = 111.0
+margin_top = 97.0
 margin_right = 76.0
-margin_bottom = 125.0
+margin_bottom = 111.0
 text = "goal_pos"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -144,9 +144,204 @@ __meta__ = {
 
 [node name="goal_pos" type="Label" parent="."]
 margin_left = 80.0
+margin_top = 97.0
+margin_right = 120.0
+margin_bottom = 111.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_level" type="Label" parent="."]
+margin_top = 111.0
+margin_right = 76.0
+margin_bottom = 125.0
+text = "level"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level" type="Label" parent="."]
+margin_left = 80.0
 margin_top = 111.0
 margin_right = 120.0
 margin_bottom = 125.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_level_time" type="Label" parent="."]
+margin_top = 125.0
+margin_right = 76.0
+margin_bottom = 139.0
+text = "level_time"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level_time" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 125.0
+margin_right = 120.0
+margin_bottom = 139.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_level_score" type="Label" parent="."]
+margin_top = 139.0
+margin_right = 76.0
+margin_bottom = 153.0
+text = "level_score"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level_score" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 139.0
+margin_right = 120.0
+margin_bottom = 153.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_total_score" type="Label" parent="."]
+margin_top = 153.0
+margin_right = 76.0
+margin_bottom = 167.0
+text = "total_score"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="total_score" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 153.0
+margin_right = 120.0
+margin_bottom = 167.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_high_score" type="Label" parent="."]
+margin_top = 166.0
+margin_right = 76.0
+margin_bottom = 180.0
+text = "high_score	"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="high_score" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 166.0
+margin_right = 120.0
+margin_bottom = 180.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_difficulty" type="Label" parent="."]
+margin_left = 176.0
+margin_top = 111.0
+margin_right = 252.0
+margin_bottom = 125.0
+text = "difficulty"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="difficulty" type="Label" parent="."]
+margin_left = 261.0
+margin_top = 111.0
+margin_right = 301.0
+margin_bottom = 125.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_mob_spawn_interval" type="Label" parent="."]
+margin_left = 176.0
+margin_top = 125.0
+margin_right = 252.0
+margin_bottom = 139.0
+text = "mob_spawn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mob_spawn_interval" type="Label" parent="."]
+margin_left = 261.0
+margin_top = 125.0
+margin_right = 301.0
+margin_bottom = 139.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_good_mob" type="Label" parent="."]
+margin_left = 176.0
+margin_top = 139.0
+margin_right = 252.0
+margin_bottom = 153.0
+text = "good_mob"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="good_mob" type="Label" parent="."]
+margin_left = 261.0
+margin_top = 139.0
+margin_right = 301.0
+margin_bottom = 153.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_mob_speed" type="Label" parent="."]
+margin_left = 176.0
+margin_top = 153.0
+margin_right = 252.0
+margin_bottom = 167.0
+text = "mob_speed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mob_speed" type="Label" parent="."]
+margin_left = 261.0
+margin_top = 153.0
+margin_right = 301.0
+margin_bottom = 167.0
+text = "123"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_energy_usage" type="Label" parent="."]
+margin_left = 176.0
+margin_top = 166.0
+margin_right = 252.0
+margin_bottom = 180.0
+text = "energy_usage"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="energy_usage" type="Label" parent="."]
+margin_left = 261.0
+margin_top = 166.0
+margin_right = 301.0
+margin_bottom = 180.0
 text = "123"
 __meta__ = {
 "_edit_use_anchors_": false

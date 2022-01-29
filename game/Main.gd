@@ -14,6 +14,8 @@ export var mob_despawn_margin: float = 200
 
 export var goal_margin: float = 20
 
+var difficulty: int = 0
+
 var max_mobs = 100
 var num_respawns = 0
 
@@ -47,6 +49,7 @@ var min_energy_saturation: float = 0.3
 
 
 var mobs: Array = []
+var mob_speed: float
 
 var goal
 
@@ -89,6 +92,7 @@ func spawn_mob():
 	var m = mob_scene.instance()
 	mobs.append(m)
 	m.position = mob_position
+	m.max_speed = mob_speed	
 	add_child(m)
 	update_mob(m)
 	
@@ -116,6 +120,19 @@ func update_debug(distance_vector):
 	$Debug/respawns.text = str(num_respawns)
 	if is_instance_valid(goal):
 		$Debug/goal_pos.text = str(goal.position)
+	
+	$Debug/level.text = str($GameStats.level)
+	$Debug/level_time.text = str($GameStats.level_time)
+	$Debug/level_score.text = str($GameStats.get_level_score())
+	$Debug/total_score.text = str($GameStats.total_score)
+	$Debug/high_score.text = str($GameStats.high_score)
+	
+	$Debug/difficulty.text = str($Difficulty.get_current_difficulty())
+	$Debug/mob_spawn_interval.text = str($Difficulty.get_mob_spawn_interval())
+	$Debug/good_mob.text = str($Difficulty.get_good_mob_proability())
+	$Debug/mob_speed.text = str($Difficulty.get_mob_speed())
+	$Debug/energy_usage.text = str($Difficulty.get_energy_usage())
+
 
 func update_debug_visibility():
 	if show_debug:
@@ -123,8 +140,12 @@ func update_debug_visibility():
 	else:
 		$Debug.scale = Vector2.ZERO
 
-func end_game():
+func end_level(victory: bool):
 	game_started = false
+	if victory:
+		$GameStats.end_level($Tank.energy)
+	else:
+		$GameStats.end_game()
 
 	for m in mobs:
 		despawn_mob(m)
@@ -136,20 +157,29 @@ func end_game():
 	$Nimble.hide()
 
 
-func new_game():
+func new_level():
 	game_started = true
+	$GameStats.start_level()
+	$Difficulty.set_level($GameStats.level)
+
 	$ScreenShaders/Light.modulate.a = 1
 	
 	for m in mobs:
 		despawn_mob(m)
-
+	
+	# difficulty settings
+	$MobTimer.wait_time = $Difficulty.get_mob_spawn_interval()
+	good_mob_probability = $Difficulty.get_good_mob_proability()
+	mob_speed = $Difficulty.get_mob_speed()
+	
 	$MobTimer.start()
 
 	$Tank.start(scene_size)
+	$Tank.energy_usage = $Difficulty.get_energy_usage()
 	$Tank.show()
 	
 	spawn_goal()
-	
+
 	var nimble_displacement_mag: float = (
 		initial_nimble_displacement + 
 		rand_range(-initial_nimble_displacement_variation, initial_nimble_displacement_variation)
@@ -159,6 +189,13 @@ func new_game():
 	$Nimble.set_goal(goal)
 	$Nimble.start($Tank.position + nimble_displacement)
 	$Nimble.show()
+
+
+func new_game():
+	$Difficulty.start(difficulty)
+	$GameStats.start($Difficulty)
+	
+	new_level()
 
 
 func goal_reached() -> bool:
@@ -220,7 +257,7 @@ func _process(delta):
 			$ScreenShaders/Saturation.set_saturation(1)
 	else:
 		if goal_reached() or $Tank.dead:
-			init_restart()
+			init_restart(goal_reached())
 		else:
 			$ScreenShaders/Saturation.set_saturation(lerp(min_energy_saturation, 1.0, $Tank.energy_adjustment()))
 	
@@ -235,8 +272,10 @@ func _process(delta):
 	if goal_reached():
 		$ScreenShaders/Light.modulate.a -= goal_reached_brightening * delta
 	
-func init_restart():
+func init_restart(victory: bool):
 	game_started = false
+	$GameStats.victory = victory
+	
 	if $EndTimer.is_stopped():
 		$EndTimer.start()	
 	
@@ -246,9 +285,12 @@ func _on_MobTimer_timeout():
 		spawn_mob()
 
 func _on_EndTimer_timeout():
-	end_game()
+	end_level($GameStats.victory)
 	$StartTimer.start()
 
 
 func _on_StartTimer_timeout():
-	new_game()
+	if $GameStats.victory:
+		new_level()
+	else:
+		new_game()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Tank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Debug.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Nimble.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ScreenShaders.tscn" type="PackedScene" id=6]
+[ext_resource path="res://GameStats.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Difficulty.tscn" type="PackedScene" id=8]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -67,6 +69,10 @@ polygon = PoolVector2Array( -463, -65, -327, 8, -266, 81, -200, 78, -168, 40, -6
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="GameStats" parent="." instance=ExtResource( 7 )]
+
+[node name="Difficulty" parent="." instance=ExtResource( 8 )]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]

@@ -36,6 +36,10 @@ var acceleration_map: Dictionary
 var dead: bool
 var goal_reached: bool
 
+export var damageSound: AudioStream
+export var goalReachedSound: AudioStream
+export var powerUpSound: AudioStream
+
 
 func get_acceleration_map() -> Dictionary:
 	return {
@@ -95,7 +99,6 @@ func play_animation(name: String, priority: int, force: bool = false):
 		$AnimationPupil.play(name)
 		current_anim_priority = priority
 
-
 func rotate_go_anim(rotation_a: float, rotation_v: float):
 	if $AnimationCloud.animation == "go":
 		$AnimationCore.rotation = rotation_a
@@ -106,10 +109,8 @@ func rotate_go_anim(rotation_a: float, rotation_v: float):
 		$AnimationCore.rotation = 0
 		$AnimationPupil.rotation = 0
 
-
 func _on_anim_finished():
 	current_anim_priority = 0
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -172,17 +173,19 @@ func _process(delta):
 	
 	$Camera.position = velocity * camera_offset_factor
 
-
 func _on_Tank_area_entered(area: Area2D):
 	if area.get("is_mob"):
 		area.collided = true
 		if area.get("is_good_mob"):
 			update_energy(+energy_gain)
 			play_animation("power_up", 3, true)
+			$SoundPlayer.play_sound(powerUpSound)
 		if area.get("is_bad_mob"):
 			update_energy(-energy_damage)
 			play_animation("damage", 3, true)
+			$SoundPlayer.play_sound(damageSound)
 	
 	if area.get("is_goal"):
 		area.reached = true
 		goal_reached = true
+		$SoundPlayer.play_sound(goalReachedSound)

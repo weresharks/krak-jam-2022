@@ -60,6 +60,14 @@ func apply_goal_modulation():
 			mod_color.g = lerp(mod_color.g, goal_detection_color.g, s)
 			mod_color.b = lerp(mod_color.b, goal_detection_color.b, s)
 			
+			var goal_volume_db = lerp(-6, 3, s)
+			var music_volume_db = lerp(0, -9, s)
+			_set_goal_volume(goal_volume_db)
+			_set_music_volume(music_volume_db)
+		else:
+			_mute_goal_volume()
+			_set_music_volume(0)
+			
 	modulate = mod_color
 
 
@@ -131,6 +139,14 @@ func _process(delta):
 	apply_goal_modulation()
 	apply_motion_animation(velocity)
 
+func _set_goal_volume(volume_db: float):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Goal"), volume_db)
+	
+func _set_music_volume(volume_db: float):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), volume_db)
+	
+func _mute_goal_volume():
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Goal"), -80)
 
 func calc_driving_controls_map(v: Vector2) -> Dictionary:
 	var half_pi: float = PI / 2

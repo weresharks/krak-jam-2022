@@ -39,7 +39,7 @@ var goal_reached: bool
 export var goalReachedSound: AudioStream
 export (Array, AudioStream) var damageSounds
 export (Array, AudioStream) var powerUpSounds
-export var max_cutoff_freq: float = 10_000
+export var max_cutoff_freq: float = 8000
 
 
 func get_acceleration_map() -> Dictionary:

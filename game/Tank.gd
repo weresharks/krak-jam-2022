@@ -82,8 +82,8 @@ func energy_adjustment():
 
 func update_energy_visuals():
 	var ea = energy_adjustment()
-	var scale = lerp(energy_scaling_min, 1.0, ea)
-	var opacity = lerp(energy_opacity_min, 1.0, ea)
+	var scale = clamp(lerp(energy_scaling_min, 1.0, ea), 0, 1)
+	var opacity = clamp(lerp(energy_opacity_min, 1.0, ea), 0, 1)
 	
 	$AnimationCore.scale = Vector2.ONE * scale
 	$AnimationPupil.scale = Vector2.ONE * scale

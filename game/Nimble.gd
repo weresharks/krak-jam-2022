@@ -17,6 +17,8 @@ export var turning_impulse: float = 1
 export var goal_detection_color: Color
 export var goal_detection_range: float = 600
 
+export var max_idle_animation_speed: float = 100
+
 var velocity: Vector2
 
 var longing: Vector2
@@ -45,6 +47,46 @@ func set_tank(_tank):
 
 func set_goal(_goal):
 	goal = _goal
+
+
+func apply_goal_modulation():
+	var mod_color = Color.white
+
+	if is_instance_valid(goal):
+		var goal_distance: float = position.distance_to(goal.position)
+		if goal_distance < goal_detection_range:
+			var s: float = (1 - goal_distance / goal_detection_range)
+			mod_color.r = lerp(mod_color.r, goal_detection_color.r, s)
+			mod_color.g = lerp(mod_color.g, goal_detection_color.g, s)
+			mod_color.b = lerp(mod_color.b, goal_detection_color.b, s)
+			
+	modulate = mod_color
+
+
+var current_anim_priority: int = 0
+	
+func play_animation(name: String, priority: int = 0, force: bool = false):
+	var current_anim = $AnimationCloud.animation
+	if (name != current_anim and priority >= current_anim_priority) or force:
+		$AnimationCloud.play(name)
+		$AnimationCore.play(name)
+		current_anim_priority = priority
+
+func _on_anim_finished():
+	current_anim_priority = 0
+
+
+func apply_motion_animation(velocity):
+	var speed = velocity.length()
+	if $AnimationCloud.animation == "go" and speed < max_idle_animation_speed:
+		play_animation("go_stop", 1)
+	elif $AnimationCloud.animation == "idle" and speed > max_idle_animation_speed:
+		play_animation("go_start", 1)
+	
+	if speed < max_idle_animation_speed:
+		play_animation("idle")
+	else:
+		play_animation("go")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -86,17 +128,8 @@ func _process(delta):
 	position += velocity * delta
 	rotation = Vector2(0, -1).angle_to(velocity)
 	
-	var mod_color = Color.white
-
-	if is_instance_valid(goal):
-		var goal_distance: float = position.distance_to(goal.position)
-		if goal_distance < goal_detection_range:
-			var s: float = (1 - goal_distance / goal_detection_range)
-			mod_color.r = lerp(mod_color.r, goal_detection_color.r, s)
-			mod_color.g = lerp(mod_color.g, goal_detection_color.g, s)
-			mod_color.b = lerp(mod_color.b, goal_detection_color.b, s)
-			
-	modulate = mod_color
+	apply_goal_modulation()
+	apply_motion_animation(velocity)
 
 
 func calc_driving_controls_map(v: Vector2) -> Dictionary:
@@ -108,3 +141,4 @@ func calc_driving_controls_map(v: Vector2) -> Dictionary:
 		"nimble_forward": v * acceleration_impulse,
 		"nimble_back": v * (- acceleration_impulse / 2),
 	}
+

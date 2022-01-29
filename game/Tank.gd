@@ -11,6 +11,9 @@ export var max_acceleration: float = 5
 export var scale_speed: float = 0 # PI / 10 # 0 -> disable scaling
 export var scale_magnitude: float = 0.3
 
+export var camera_offset_factor: float = 0.2
+
+
 var velocity = Vector2.ZERO
 var margin = 20
 var max_position: Vector2
@@ -21,9 +24,9 @@ export var start_energy: float = 100
 var energy: float
 var max_energy: float = 200
 var energy_nominal: float = 100
-var energy_usage: float = 0.2
+var energy_usage: float = 0.1
 var energy_damage: float = 20
-var energy_gain: float = 20
+var energy_gain: float = 30
 
 var acceleration_map: Dictionary
 
@@ -145,6 +148,8 @@ func _process(delta):
 	
 	scale_phase += scale_speed * delta
 	scale = base_scale * (1 + scale_magnitude * sin(scale_phase))
+	
+	$Camera.position = velocity * camera_offset_factor
 
 
 func _on_Tank_area_entered(area: Area2D):

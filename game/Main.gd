@@ -221,9 +221,9 @@ func _process(delta):
 		else:
 			$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
 	
-	var nimble_uv = ($Nimble.position - $Tank.position) / get_viewport().size + Vector2.ONE / 2
+	var nimble_uv = ($Nimble.position - ($Tank.position + $Tank/Camera.position)) / get_viewport().size + Vector2.ONE / 2
 	$ScreenShaders/Light.set_light_position(nimble_uv)
-	$ScreenShaders/Light.set_light2_position(Vector2.ONE * 0.5)
+	$ScreenShaders/Light.set_light2_position(Vector2.ONE * 0.5 - $Tank/Camera.position / get_viewport().size)
 	$ScreenShaders/Light.set_light2_softness(
 		base_tank_light_softness + sin(tank_light_softness_phase) * tank_light_softness_mag * $Tank.energy_adjustment()
 	)

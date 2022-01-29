@@ -165,7 +165,7 @@ func _process(delta):
 	
 	velocity += acceleration
 	
-	var max_current_speed = max_speed * energy_adjustment()
+	var max_current_speed = max_speed * clamp(energy_adjustment(), 0.33, 2)
 	
 	if velocity.length() > max_current_speed:
 		velocity = velocity.normalized() * max_current_speed

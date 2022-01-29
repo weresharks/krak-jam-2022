@@ -14,7 +14,7 @@ export var mob_despawn_margin: float = 200
 
 export var goal_margin: float = 20
 
-var difficulty: int = 1
+var difficulty: int = 0
 
 var max_mobs = 100
 var num_respawns = 0

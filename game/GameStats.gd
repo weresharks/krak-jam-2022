@@ -18,6 +18,7 @@ var victory: bool = false
 
 func start(_difficulty):
 	level = 0
+	total_score = 0
 	Difficulty = _difficulty
 
 

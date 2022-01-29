@@ -2,6 +2,7 @@ extends Node2D
 
 
 var tank
+var goal
 
 export var max_speed: float = 200
 export var min_speed: float = 5
@@ -12,6 +13,9 @@ export var longing_base: float = 0.12
 export var longing_distance: float = 70
 export var acceleration_impulse: float = 10
 export var turning_impulse: float = 1
+
+export var goal_detection_color: Color
+export var goal_detection_range: float = 500
 
 var velocity: Vector2
 
@@ -37,6 +41,10 @@ func start(start_pos: Vector2):
 
 func set_tank(_tank):
 	tank = _tank
+
+
+func set_goal(_goal):
+	goal = _goal
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -77,6 +85,13 @@ func _process(delta):
 
 	position += velocity * delta
 	rotation = Vector2(0, -1).angle_to(velocity)
+	
+	if is_instance_valid(goal):
+		var goal_distance: float = position.distance_to(goal.position)
+		if goal_distance < goal_detection_range:
+			var mod_color: Color = goal_detection_color
+			mod_color.a = 1 - goal_distance / goal_detection_range
+			modulate = mod_color
 
 
 func calc_driving_controls_map(v: Vector2) -> Dictionary:

@@ -13,6 +13,7 @@ script = ExtResource( 2 )
 [node name="Nimble" parent="." instance=ExtResource( 5 )]
 visible = false
 z_index = 2
+goal_detection_color = Color( 1, 0.843137, 0, 1 )
 
 [node name="Tank" parent="." instance=ExtResource( 1 )]
 visible = false

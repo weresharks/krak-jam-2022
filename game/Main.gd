@@ -27,7 +27,7 @@ export var good_mob_probability: float = 0.2
 export var min_mob_spawn_distance: float = 200
 var min_mob_spawn_distance_2: float
 
-export var min_goal_spawn_distance: float = 600
+export var min_goal_spawn_distance: float = 800
 var min_goal_spawn_distance_2: float
 
 
@@ -154,6 +154,7 @@ func new_game():
 	)
 	var nimble_displacement = Vector2(0, nimble_displacement_mag).rotated(rand_range(0, 2 * PI))	
 	$Nimble.set_tank($Tank)
+	$Nimble.set_goal(goal)
 	$Nimble.start($Tank.position + nimble_displacement)
 	$Nimble.show()
 

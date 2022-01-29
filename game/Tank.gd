@@ -65,7 +65,8 @@ func update_energy(energy_delta):
 	energy = clamp(energy, 0, max_energy)
 	if energy <= 0:
 		dead = true
-		play_animation("death_decay", 3, true)
+		if $AnimationCloud.animation != "death_decay":
+			play_animation("death_decay", 3, true)
 	else:
 		update_energy_visuals()
 	
@@ -117,11 +118,12 @@ func _process(delta):
 	for key in acceleration_map.keys():
 		if Input.is_action_pressed(key):
 			acceleration += acceleration_map[key]
-			
-	if acceleration == Vector2.ZERO:
-		play_animation("idle", 1)
-	else:
-		play_animation("go", 1)
+	
+	if energy > 0:
+		if acceleration == Vector2.ZERO:
+			play_animation("idle", 1)
+		else:
+			play_animation("go", 1)
 	
 	rotate_go_anim(Vector2.UP.angle_to(acceleration), Vector2.UP.angle_to(velocity))
 	

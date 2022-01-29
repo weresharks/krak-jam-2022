@@ -11,6 +11,7 @@ export var difficulty_adjustment: Dictionary = {
 export var max_difficulty: int = 42
 
 export var mob_spawn_interval_range: Array = [5, 0.5]
+export var initial_mob_spawns_range: Array = [0, max_difficulty]
 export var good_mob_probability_range: Array = [1.0, 0.1]
 export var mob_speed_range: Array = [10, 100]
 export var energy_usage_range: Array = [0.05, 1]
@@ -54,3 +55,6 @@ func get_mob_speed() -> float:
 func get_energy_usage() -> float:
 	return lerp_with_difficulty(energy_usage_range)
 
+
+func get_initial_mob_spawns() -> int:
+	return int(lerp_with_difficulty(initial_mob_spawns_range))

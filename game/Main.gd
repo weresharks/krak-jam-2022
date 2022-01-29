@@ -14,7 +14,7 @@ export var mob_despawn_margin: float = 200
 
 export var goal_margin: float = 20
 
-var difficulty: int = 0
+var difficulty: int = 1
 
 var max_mobs = 100
 var num_respawns = 0
@@ -189,6 +189,9 @@ func new_level():
 	$Nimble.set_goal(goal)
 	$Nimble.start($Tank.position + nimble_displacement)
 	$Nimble.show()
+	
+	for i in range($Difficulty.get_initial_mob_spawns()):
+		spawn_mob()
 
 
 func new_game():

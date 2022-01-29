@@ -4,8 +4,8 @@ enum DIFFICULTY {EASY, NORMAL, HARD}
 
 export var difficulty_adjustment: Dictionary = {
 	DIFFICULTY.EASY: 0,
-	DIFFICULTY.NORMAL: 5,
-	DIFFICULTY.HARD: 10
+	DIFFICULTY.NORMAL: 7,
+	DIFFICULTY.HARD: 20
 }
 
 export var max_difficulty: int = 42

@@ -2,7 +2,7 @@
 
 [sub_resource type="AudioEffectLowPassFilter" id=2]
 resource_name = "LowPassFilter"
-cutoff_hz = 5000.0
+cutoff_hz = 6000.0
 resonance = 0.75
 
 [sub_resource type="AudioEffectLowPassFilter" id=1]

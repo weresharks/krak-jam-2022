@@ -53,13 +53,13 @@ void fragment(){
 [sub_resource type="ShaderMaterial" id=5]
 shader = SubResource( 4 )
 shader_param/light_position = Vector2( 0.272, 0.212 )
-shader_param/light2_position = Vector2( 0.288, 0.396 )
+shader_param/light2_position = Vector2( 0.32, 0.396 )
 shader_param/color = Color( 0, 0, 0, 0.964706 )
 shader_param/MULTIPLIER = 0.56
 shader_param/SCALE = 0.316
 shader_param/SOFTNESS = 0.508
-shader_param/SCALE2 = 0.32
-shader_param/SOFTNESS2 = 0.328
+shader_param/SCALE2 = 1.21
+shader_param/SOFTNESS2 = 0.974
 
 [node name="ScreenShaders" type="CanvasLayer"]
 

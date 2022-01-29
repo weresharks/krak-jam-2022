@@ -2,13 +2,16 @@ extends "res://BaseMob.gd"
 
 var is_good_mob = true
 
+
+func _ready():
+	$TrueColors.play(anim)
+	$AnimatedSprite.play(anim)
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	._process(delta)
 	var nimble_dist_2 = position.distance_squared_to(nimble.position)
 	if nimble_dist_2 < nimble_range_squared:
-		$TrueColors.visible = true
-		$Polygon2D.visible = false
+		$TrueColors.modulate.a = smoothstep(nimble_range_squared, 0, nimble_dist_2)
 	else:
-		$TrueColors.visible = false
-		$Polygon2D.visible = true
+		$TrueColors.modulate.a = 0

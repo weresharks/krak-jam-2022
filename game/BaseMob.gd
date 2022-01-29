@@ -2,20 +2,20 @@ extends Area2D
 
 var is_mob = true
 
-export var tank_detection_range: float = 300
-export var nimble_range: float = 100
+export var tank_detection_range: float = 200
+export var nimble_range: float = 50
 
 export var base_speed: float = 25
 export var speed_variation: float = 10
-export var max_speed: float = 110
+export var max_speed: float = 60
 
-export var hunting_impulse: float = 0.24
+export var hunting_impulse: float = 0.6
 
-export var slowdown_impulse: float = 0.5
-export var slowdown_cutoff_speed: float = 5
+export var slowdown_impulse: float = 0.3
+export var slowdown_cutoff_speed: float = 2
 
 export var max_spontaneous_speed: float = 10
-export var spontaneous_impulse = 2
+export var spontaneous_impulse = 0.2
 
 
 var tank_detection_range_squared: float
@@ -26,9 +26,11 @@ var nimble
 
 var speed: float
 var velocity: Vector2 = Vector2.ZERO
-var rotation_speed = 0.1 * PI
+export var rotation_speed = 0 # 0.1 * PI
 
 var collided: bool = false
+
+var anim: String = "v1"
 
 
 func start(pos: Vector2):
@@ -41,11 +43,17 @@ func _ready():
 	tank_detection_range_squared = tank_detection_range * tank_detection_range
 	nimble_range_squared = nimble_range * nimble_range
 
+
 func set_tank(_tank):
 	tank = _tank
 
+
 func set_nimble(_nimble):
 	nimble = _nimble
+
+
+func set_anim(_anim):
+	anim = _anim
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

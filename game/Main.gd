@@ -24,7 +24,7 @@ var Goal: PackedScene = load("res://Goal.tscn")
 
 export var good_mob_probability: float = 0.2
 
-export var min_mob_spawn_distance: float = 300
+export var min_mob_spawn_distance: float = 200
 var min_mob_spawn_distance_2: float
 
 export var min_goal_spawn_distance: float = 600
@@ -89,6 +89,9 @@ func spawn_mob():
 	m.position = mob_position
 	add_child(m)
 	update_mob(m)
+	
+	var anims = ["v1", "v2", "v3"]
+	m.set_anim(anims[randi() % 3])
 
 
 func despawn_mob(m):

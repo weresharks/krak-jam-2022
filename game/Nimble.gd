@@ -15,7 +15,7 @@ export var acceleration_impulse: float = 10
 export var turning_impulse: float = 1
 
 export var goal_detection_color: Color
-export var goal_detection_range: float = 500
+export var goal_detection_range: float = 600
 
 var velocity: Vector2
 
@@ -86,12 +86,17 @@ func _process(delta):
 	position += velocity * delta
 	rotation = Vector2(0, -1).angle_to(velocity)
 	
+	var mod_color = Color.white
+
 	if is_instance_valid(goal):
 		var goal_distance: float = position.distance_to(goal.position)
 		if goal_distance < goal_detection_range:
-			var mod_color: Color = goal_detection_color
-			mod_color.a = 1 - goal_distance / goal_detection_range
-			modulate = mod_color
+			var s: float = (1 - goal_distance / goal_detection_range)
+			mod_color.r = smoothstep(mod_color.r, goal_detection_color.r, s)
+			mod_color.g = smoothstep(mod_color.g, goal_detection_color.g, s)
+			mod_color.b = smoothstep(mod_color.b, goal_detection_color.b, s)
+			
+	modulate = mod_color
 
 
 func calc_driving_controls_map(v: Vector2) -> Dictionary:

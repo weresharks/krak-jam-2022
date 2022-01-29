@@ -43,6 +43,8 @@ var tank_light_softness_phase: float = 0
 
 var goal_reached_brightening: float = 1
 
+var min_energy_saturation: float = 0.3
+
 
 var mobs: Array = []
 
@@ -220,7 +222,7 @@ func _process(delta):
 		if goal_reached() or $Tank.dead:
 			init_restart()
 		else:
-			$ScreenShaders/Saturation.set_saturation(clamp($Tank.energy_adjustment(), 0, 1))
+			$ScreenShaders/Saturation.set_saturation(lerp(min_energy_saturation, 1.0, $Tank.energy_adjustment()))
 	
 	var nimble_uv = ($Nimble.position - ($Tank.position + $Tank/Camera.position)) / get_viewport().size + Vector2.ONE / 2
 	$ScreenShaders/Light.set_light_position(nimble_uv)

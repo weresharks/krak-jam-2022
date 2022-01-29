@@ -92,9 +92,9 @@ func _process(delta):
 		var goal_distance: float = position.distance_to(goal.position)
 		if goal_distance < goal_detection_range:
 			var s: float = (1 - goal_distance / goal_detection_range)
-			mod_color.r = smoothstep(mod_color.r, goal_detection_color.r, s)
-			mod_color.g = smoothstep(mod_color.g, goal_detection_color.g, s)
-			mod_color.b = smoothstep(mod_color.b, goal_detection_color.b, s)
+			mod_color.r = lerp(mod_color.r, goal_detection_color.r, s)
+			mod_color.g = lerp(mod_color.g, goal_detection_color.g, s)
+			mod_color.b = lerp(mod_color.b, goal_detection_color.b, s)
 			
 	modulate = mod_color
 

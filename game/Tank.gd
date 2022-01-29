@@ -13,6 +13,9 @@ export var scale_magnitude: float = 0.3
 
 export var camera_offset_factor: float = 0.2
 
+export var energy_scaling_min: float = 0.6
+export var energy_opacity_min: float = 0.2
+
 
 var velocity = Vector2.ZERO
 var margin = 20
@@ -63,10 +66,23 @@ func update_energy(energy_delta):
 	if energy <= 0:
 		dead = true
 		play_animation("death_decay", 3, true)
+	else:
+		update_energy_visuals()
+	
 
 func energy_adjustment():
 	var adj = energy / energy_nominal
 	return adj
+
+
+func update_energy_visuals():
+	var ea = energy_adjustment()
+	var scale = lerp(energy_scaling_min, 1.0, ea)
+	var opacity = lerp(energy_opacity_min, 1.0, ea)
+	
+	$AnimationCore.scale = Vector2.ONE * scale
+	$AnimationPupil.scale = Vector2.ONE * scale
+	$AnimationCore.modulate.a = opacity
 	
 var current_anim_priority: int = 0
 	
@@ -78,6 +94,7 @@ func play_animation(name: String, priority: int, force: bool = false):
 		$AnimationPupil.play(name)
 		current_anim_priority = priority
 
+
 func rotate_go_anim(rotation_a: float, rotation_v: float):
 	if $AnimationCloud.animation == "go":
 		$AnimationCore.rotation = rotation_a
@@ -88,8 +105,10 @@ func rotate_go_anim(rotation_a: float, rotation_v: float):
 		$AnimationCore.rotation = 0
 		$AnimationPupil.rotation = 0
 
+
 func _on_anim_finished():
 	current_anim_priority = 0
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

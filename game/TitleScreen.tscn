@@ -29,13 +29,13 @@ __meta__ = {
 [node name="Background" type="AnimatedSprite" parent="."]
 position = Vector2( 160, 90 )
 frames = ExtResource( 17 )
-frame = 5
+frame = 7
 playing = true
 
 [node name="Title" type="AnimatedSprite" parent="."]
 position = Vector2( 240, 48 )
 frames = ExtResource( 18 )
-frame = 11
+frame = 6
 playing = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -50,7 +50,6 @@ __meta__ = {
 }
 
 [node name="StartButton" type="TextureButton" parent="VBoxContainer"]
-margin_top = 12.0
 margin_right = 128.0
 margin_bottom = 32.0
 texture_normal = ExtResource( 1 )
@@ -111,4 +110,5 @@ texture_normal = ExtResource( 8 )
 texture_focused = ExtResource( 7 )
 
 [node name="SceneTransition" parent="." instance=ExtResource( 4 )]
+visible = false
 next_scene_path = "res://Main.tscn"

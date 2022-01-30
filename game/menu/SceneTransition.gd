@@ -3,6 +3,7 @@ extends ColorRect
 export(String, FILE, "*.tscn") var next_scene_path
 
 func _ready():
+	visible = true
 	$AnimationPlayer.play_backwards("Fade")
 
 func transition():

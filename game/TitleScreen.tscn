@@ -1,0 +1,100 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://sprites/menu/start.png" type="Texture" id=1]
+[ext_resource path="res://sprites/menu/dificulty.png" type="Texture" id=2]
+[ext_resource path="res://menu/StartButton.gd" type="Script" id=3]
+[ext_resource path="res://menu/SceneTransition.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sprites/menu/rama_dificulty.png" type="Texture" id=5]
+[ext_resource path="res://sprites/menu/rama_start.png" type="Texture" id=6]
+[ext_resource path="res://sprites/menu/rama_how.png" type="Texture" id=7]
+[ext_resource path="res://sprites/menu/how.png" type="Texture" id=8]
+[ext_resource path="res://sprites/menu/normal.png" type="Texture" id=9]
+[ext_resource path="res://sprites/menu/rama_hard.png" type="Texture" id=10]
+[ext_resource path="res://sprites/menu/easy.png" type="Texture" id=11]
+[ext_resource path="res://sprites/menu/rama_easy.png" type="Texture" id=12]
+[ext_resource path="res://sprites/menu/rama_normal.png" type="Texture" id=13]
+[ext_resource path="res://sprites/menu/hard.png" type="Texture" id=14]
+[ext_resource path="res://menu/DifficultyButton.gd" type="Script" id=15]
+[ext_resource path="res://menu/DifficultyLevelButton.gd" type="Script" id=16]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -104.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="TextureButton" parent="VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 1 )
+texture_focused = ExtResource( 6 )
+script = ExtResource( 3 )
+
+[node name="DifficultyButton" type="TextureButton" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 128.0
+margin_bottom = 68.0
+texture_normal = ExtResource( 2 )
+texture_focused = ExtResource( 5 )
+script = ExtResource( 15 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/DifficultyButton"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -52.0
+margin_top = -8.0
+margin_right = 52.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EasyButton" type="TextureButton" parent="VBoxContainer/DifficultyButton/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 11 )
+texture_focused = ExtResource( 12 )
+script = ExtResource( 16 )
+
+[node name="NormalButton" type="TextureButton" parent="VBoxContainer/DifficultyButton/HBoxContainer"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 9 )
+texture_focused = ExtResource( 13 )
+script = ExtResource( 16 )
+difficulty_level = 1
+is_selected = true
+
+[node name="HardButton" type="TextureButton" parent="VBoxContainer/DifficultyButton/HBoxContainer"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 14 )
+texture_focused = ExtResource( 10 )
+script = ExtResource( 16 )
+difficulty_level = 2
+
+[node name="HowToButton" type="TextureButton" parent="VBoxContainer"]
+margin_top = 72.0
+margin_right = 128.0
+margin_bottom = 104.0
+texture_normal = ExtResource( 8 )
+texture_focused = ExtResource( 7 )
+
+[node name="SceneTransition" parent="." instance=ExtResource( 4 )]
+visible = false
+next_scene_path = "res://Main.tscn"

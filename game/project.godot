@@ -8,11 +8,25 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "TextureButton",
+"class": "DifficultyLevelButton",
+"language": "GDScript",
+"path": "res://menu/DifficultyLevelButton.gd"
+} ]
+_global_script_class_icons={
+"DifficultyLevelButton": ""
+}
+
 [application]
 
 config/name="Game"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [display]
 
@@ -95,7 +109,7 @@ nimble_right={
 }
 debug_toggle={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":false,"pressed":false,"scancode":73,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

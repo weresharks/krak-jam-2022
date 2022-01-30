@@ -26,11 +26,13 @@ shape = SubResource( 1 )
 [node name="AnimationCloud" type="AnimatedSprite" parent="."]
 frames = ExtResource( 3 )
 animation = "idle"
+frame = 2
 playing = true
 
 [node name="AnimationCore" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
 animation = "idle"
+frame = 2
 playing = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

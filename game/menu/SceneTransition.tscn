@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://menu/Fade.tres" type="Animation" id=1]
+[ext_resource path="res://menu/SceneTransition.gd" type="Script" id=2]
+
+[node name="SceneTransition" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fade = ExtResource( 1 )

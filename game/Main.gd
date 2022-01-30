@@ -146,6 +146,8 @@ func end_level(victory: bool):
 		$GameStats.end_level($Tank.energy)
 	else:
 		$GameStats.end_game()
+		Global.last_game_score = $GameStats.total_score
+		Global.high_score = $GameStats.high_score
 
 	for m in mobs:
 		despawn_mob(m)
@@ -224,6 +226,9 @@ func _ready():
 	min_goal_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
 	update_debug_visibility()
 	difficulty = Global.difficulty_level
+	
+	if Global.high_score > 0:
+		$GameStats.high_score = Global.high_score
 	
 	new_game()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://sprites/menu/start.png" type="Texture" id=1]
 [ext_resource path="res://sprites/menu/dificulty.png" type="Texture" id=2]
@@ -31,11 +31,14 @@
 [ext_resource path="res://sprites/menu/monsters/monster 9.png" type="Texture" id=29]
 [ext_resource path="res://sprites/menu/monsters/monster 2.png" type="Texture" id=30]
 [ext_resource path="res://sprites/menu/monsters/monster 8.png" type="Texture" id=31]
-[ext_resource path="res://Fonts/monciaki-sans-bold.ttf" type="DynamicFontData" id=32]
+[ext_resource path="res://menu/BackButton.gd" type="Script" id=32]
+[ext_resource path="res://menu/HowToButton.gd" type="Script" id=33]
+[ext_resource path="res://sprites/menu/tutorial.res" type="SpriteFrames" id=34]
+[ext_resource path="res://Fonts/monciaki-sans-bold.ttf" type="DynamicFontData" id=35]
 
 [sub_resource type="DynamicFont" id=1]
 size = 5
-font_data = ExtResource( 32 )
+font_data = ExtResource( 35 )
 
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
@@ -52,13 +55,13 @@ monsters = [ ExtResource( 21 ), ExtResource( 30 ), ExtResource( 26 ), ExtResourc
 [node name="Background" type="AnimatedSprite" parent="."]
 position = Vector2( 160, 90 )
 frames = ExtResource( 17 )
-frame = 1
+frame = 8
 playing = true
 
 [node name="Title" type="AnimatedSprite" parent="."]
 position = Vector2( 240, 48 )
 frames = ExtResource( 18 )
-frame = 7
+frame = 12
 playing = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -131,10 +134,7 @@ margin_right = 128.0
 margin_bottom = 104.0
 texture_normal = ExtResource( 8 )
 texture_focused = ExtResource( 7 )
-
-[node name="SceneTransition" parent="." instance=ExtResource( 4 )]
-visible = false
-next_scene_path = "res://Main.tscn"
+script = ExtResource( 33 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
@@ -195,6 +195,33 @@ margin_bottom = 77.0
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.501961, 0.643137, 1 )
 text = "12345"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Monster" type="Sprite" parent="."]
+position = Vector2( 160, 90 )
+
+[node name="SceneTransition" parent="." instance=ExtResource( 4 )]
+visible = false
+next_scene_path = "res://Main.tscn"
+
+[node name="TutorialScreen" type="Control" parent="."]
+visible = false
+margin_right = 320.0
+margin_bottom = 180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TutorialImage" type="AnimatedSprite" parent="TutorialScreen"]
+position = Vector2( 160, 90 )
+frames = ExtResource( 34 )
+
+[node name="BackButton" type="TextureButton" parent="TutorialScreen"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

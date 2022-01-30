@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Tank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Difficulty.tscn" type="PackedScene" id=8]
 [ext_resource path="res://audio/game_loop.ogg" type="AudioStream" id=9]
 [ext_resource path="res://LevelSummary.tscn" type="PackedScene" id=10]
+[ext_resource path="res://menu/SceneTransition.tscn" type="PackedScene" id=11]
+[ext_resource path="res://menu/MusicTransition.tscn" type="PackedScene" id=12]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -82,6 +84,12 @@ autoplay = true
 bus = "Music"
 
 [node name="LevelSummary" parent="." instance=ExtResource( 10 )]
+
+[node name="SceneTransition" parent="." instance=ExtResource( 11 )]
+visible = false
+next_scene_path = "res://TitleScreen.tscn"
+
+[node name="MusicTransition" parent="." instance=ExtResource( 12 )]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]

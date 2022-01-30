@@ -162,7 +162,6 @@ func end_level(victory: bool):
 		$LevelSummary.start($GameStats, $StartTimer)
 	else:
 		transition_to_title()
-		$StartTimer.start()
 
 func transition_to_title():
 	$SceneTransition.transition()

@@ -40,7 +40,7 @@ func _input(event):
 	if not started:
 		return
 
-	if event is InputEventKey and event.pressed:
+	if (event is InputEventKey or event is InputEventJoypadButton) and event.pressed:
 		started = false
 		
 		for s in stages:

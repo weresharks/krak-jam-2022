@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="Petri Dish Odyseey"
 run/main_scene="res://TitleScreen.tscn"
-config/icon="res://sprites/PROP_tank_big.png"
+config/icon="res://icon.png"
 
 [autoload]
 

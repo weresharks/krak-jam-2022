@@ -10,6 +10,10 @@ var base_scale: Vector2
 var scale_phase: float = 0
 
 
+func play_end_animation():
+	$AnimatedSprite.play("end")
+
+
 func _ready():
 	reached = false
 	base_scale = scale
@@ -18,3 +22,9 @@ func _ready():
 func _process(delta):
 	scale_phase += scale_speed * delta
 	scale = base_scale * (1 + scale_magnitude * sin(scale_phase))
+
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "end":
+		$AnimatedSprite.stop()
+		self.hide()

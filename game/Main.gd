@@ -156,6 +156,7 @@ func end_level(victory: bool):
 	
 	$Tank.hide()
 	$Nimble.hide()
+	$MobTimer.stop()
 
 	end_level_screen = true
 	$LevelSummary.start($GameStats, $StartTimer)
@@ -181,6 +182,7 @@ func new_level():
 	$Tank.start(scene_size)
 	$Tank.energy_usage = $Difficulty.get_energy_usage()
 	$Tank.show()
+	$ScreenShaders/Light.show()
 	
 	spawn_goal()
 
@@ -282,6 +284,11 @@ func _process(delta):
 func init_restart(victory: bool):
 	game_started = false
 	$GameStats.victory = victory
+	if victory:
+		$Tank.hide()
+		$Nimble.hide()
+		$ScreenShaders/Light.hide()
+		goal.play_end_animation()
 	
 	if $EndTimer.is_stopped():
 		$EndTimer.start()	

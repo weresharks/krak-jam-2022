@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://menu/Fade.tres" type="Animation" id=1]
+[ext_resource path="res://menu/MusicTransition.gd" type="Script" id=2]
+[ext_resource path="res://menu/FadeMusic.tres" type="Animation" id=3]
+
+[node name="MusicTransition" type="Node"]
+script = ExtResource( 2 )
+volume_db = 80.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fade = ExtResource( 1 )
+anims/FadeMusic = ExtResource( 3 )

@@ -1,0 +1,168 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Fonts/monciaki-sans-bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://LevelSummary.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 10
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[node name="LevelSummary" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="level_completed" type="Label" parent="."]
+visible = false
+margin_top = 48.0
+margin_right = 320.0
+margin_bottom = 84.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0.643137, 0.219608, 0.47451, 1 )
+custom_colors/font_color_shadow = Color( 0.24, 0.0816, 0.17664, 1 )
+text = "Level 42 completed"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_time" type="Label" parent="."]
+visible = false
+margin_top = 72.0
+margin_right = 160.0
+margin_bottom = 108.0
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.4, 0.136, 0.2944, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.0666667, 0.14902, 1 )
+text = "Time"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_energy" type="Label" parent="."]
+visible = false
+margin_top = 88.0
+margin_right = 160.0
+margin_bottom = 124.0
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.4, 0.136, 0.2944, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.0666667, 0.14902, 1 )
+text = "Energy left"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_score" type="Label" parent="."]
+visible = false
+margin_top = 104.0
+margin_right = 160.0
+margin_bottom = 140.0
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.4, 0.136, 0.2944, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.0666667, 0.14902, 1 )
+text = "Score"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_total_score" type="Label" parent="."]
+visible = false
+margin_top = 128.0
+margin_right = 160.0
+margin_bottom = 164.0
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.59, 0.2006, 0.43424, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.0666667, 0.14902, 1 )
+text = "Total Score"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="time" type="Label" parent="."]
+visible = false
+margin_left = 176.0
+margin_top = 72.0
+margin_right = 320.0
+margin_bottom = 108.0
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.4, 0.136, 0.2944, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.0666667, 0.14902, 1 )
+text = "120"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="energy" type="Label" parent="."]
+visible = false
+margin_left = 176.0
+margin_top = 88.0
+margin_right = 320.0
+margin_bottom = 124.0
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.4, 0.136, 0.2944, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.0666667, 0.14902, 1 )
+text = "42"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score" type="Label" parent="."]
+visible = false
+margin_left = 176.0
+margin_top = 104.0
+margin_right = 320.0
+margin_bottom = 140.0
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.4, 0.136, 0.2944, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.0666667, 0.14902, 1 )
+text = "230177"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="total_score" type="Label" parent="."]
+visible = false
+margin_left = 176.0
+margin_top = 128.0
+margin_right = 320.0
+margin_bottom = 164.0
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.59, 0.2006, 0.43424, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.0666667, 0.14902, 1 )
+text = "1234567890"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+z_index = -1
+color = Color( 0.388235, 0.388235, 0.388235, 1 )
+polygon = PoolVector2Array( -5, -4, 326, -4, 326, 183, -10, 182 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -8,6 +8,8 @@ export var max_time: float = 600
 var Difficulty
 var level: int
 var level_time: float = 0
+var last_level_time: float
+var last_level_energy: float
 var last_level_score: int = 0
 var total_score: int = 0
 
@@ -29,6 +31,8 @@ func start_level():
 
 
 func end_level(energy):
+	last_level_time = level_time
+	last_level_energy = energy
 	last_level_score = get_level_score() + get_bonus_score(energy)
 	total_score += last_level_score
 
@@ -41,7 +45,7 @@ func end_game():
 
 func get_level_score():
 	var score_multiplier = level_multiplier_base * Difficulty.get_current_difficulty()
-	return level_time * score_multiplier
+	return int(level_time * score_multiplier)
 
 
 func get_bonus_score(energy_left: float) -> int:

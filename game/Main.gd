@@ -54,6 +54,7 @@ var mob_speed: float
 var goal
 
 var game_started = false
+var end_level_screen: bool = false
 
 
 func find_spawn_point(origin: Vector2, spawn_range_squared: float, margin: float, retries: int = 10):
@@ -155,6 +156,9 @@ func end_level(victory: bool):
 	
 	$Tank.hide()
 	$Nimble.hide()
+
+	end_level_screen = true
+	$LevelSummary.start($GameStats, $StartTimer)
 
 
 func new_level():
@@ -289,7 +293,6 @@ func _on_MobTimer_timeout():
 
 func _on_EndTimer_timeout():
 	end_level($GameStats.victory)
-	$StartTimer.start()
 
 
 func _on_StartTimer_timeout():

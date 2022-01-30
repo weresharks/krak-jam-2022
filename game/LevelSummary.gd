@@ -51,6 +51,9 @@ func _input(event):
 
 
 func _on_Timer_timeout():
+	if not started:
+		return
+
 	for l in stages[current_stage]:
 		l.show()
 	current_stage += 1

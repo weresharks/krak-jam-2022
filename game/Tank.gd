@@ -97,7 +97,7 @@ func update_music_cutoff(scale: float):
 	
 var current_anim_priority: int = 0
 	
-func play_animation(name: String, priority: int, force: bool = false):
+func play_animation(name: String, priority: int = 0, force: bool = false):
 	var current_anim = $AnimationCloud.animation
 	if (name != current_anim and priority >= current_anim_priority) or force:
 		$AnimationCloud.play(name)

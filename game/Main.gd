@@ -54,7 +54,6 @@ var mob_speed: float
 var goal
 
 var game_started = false
-var end_level_screen: bool = false
 
 
 func find_spawn_point(origin: Vector2, spawn_range_squared: float, margin: float, retries: int = 10):
@@ -154,12 +153,18 @@ func end_level(victory: bool):
 	if goal:
 		goal.queue_free()
 	
+	$Tank.play_animation("idle")
 	$Tank.hide()
 	$Nimble.hide()
 	$MobTimer.stop()
 
-	end_level_screen = true
-	$LevelSummary.start($GameStats, $StartTimer)
+	if victory:
+		$LevelSummary.start($GameStats, $StartTimer)
+	else:
+		
+		# TODO: replace with a transition to the TitleScreen
+		
+		$StartTimer.start()
 
 
 func new_level():
@@ -218,6 +223,7 @@ func _ready():
 	min_mob_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
 	min_goal_spawn_distance_2 = min_mob_spawn_distance * min_mob_spawn_distance
 	update_debug_visibility()
+	difficulty = Global.difficulty_level
 	
 	new_game()
 

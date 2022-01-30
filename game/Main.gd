@@ -161,11 +161,12 @@ func end_level(victory: bool):
 	if victory:
 		$LevelSummary.start($GameStats, $StartTimer)
 	else:
-		
-		# TODO: replace with a transition to the TitleScreen
-		
+		transition_to_title()
 		$StartTimer.start()
 
+func transition_to_title():
+	$SceneTransition.transition()
+	$MusicTransition.transition()
 
 func new_level():
 	game_started = true

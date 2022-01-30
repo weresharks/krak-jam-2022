@@ -11,5 +11,4 @@ func transition():
 	$AnimationPlayer.play_backwards("FadeMusic")
 
 func set_volume(value):
-	print(value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), -value)

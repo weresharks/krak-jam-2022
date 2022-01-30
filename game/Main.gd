@@ -292,6 +292,10 @@ func _process(delta):
 	if goal_reached():
 		$ScreenShaders/Light.modulate.a -= goal_reached_brightening * delta
 	
+	if Input.is_action_pressed("abort"):
+		$Tank.energy = 0
+
+
 func init_restart(victory: bool):
 	game_started = false
 	$GameStats.victory = victory

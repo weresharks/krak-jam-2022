@@ -56,42 +56,56 @@ monsters = [ ExtResource( 21 ), ExtResource( 30 ), ExtResource( 26 ), ExtResourc
 [node name="Background" type="AnimatedSprite" parent="."]
 position = Vector2( 160, 90 )
 frames = ExtResource( 17 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="Title" type="AnimatedSprite" parent="."]
 position = Vector2( 240, 48 )
 frames = ExtResource( 18 )
-frame = 10
+frame = 9
 playing = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -128.0
-margin_top = -100.0
+[node name="StartButton" type="TextureButton" parent="."]
+margin_left = 192.0
+margin_top = 101.0
+margin_right = 320.0
+margin_bottom = 112.0
+focus_neighbour_bottom = NodePath("../HowToButton")
+texture_normal = ExtResource( 1 )
+texture_focused = ExtResource( 6 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartButton" type="TextureButton" parent="VBoxContainer"]
-margin_right = 128.0
-margin_bottom = 32.0
-texture_normal = ExtResource( 1 )
-texture_focused = ExtResource( 6 )
-script = ExtResource( 3 )
+[node name="HowToButton" type="TextureButton" parent="."]
+margin_left = 192.0
+margin_top = 122.0
+margin_right = 320.0
+margin_bottom = 154.0
+focus_neighbour_top = NodePath("../StartButton")
+focus_neighbour_bottom = NodePath("../DifficultyButton")
+texture_normal = ExtResource( 8 )
+texture_focused = ExtResource( 7 )
+script = ExtResource( 33 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="DifficultyButton" type="TextureButton" parent="VBoxContainer"]
-margin_top = 36.0
-margin_right = 128.0
-margin_bottom = 68.0
+[node name="DifficultyButton" type="TextureButton" parent="."]
+margin_left = 192.0
+margin_top = 143.0
+margin_right = 320.0
+margin_bottom = 112.0
+focus_neighbour_top = NodePath("../HowToButton")
 texture_normal = ExtResource( 2 )
 texture_focused = ExtResource( 5 )
 script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/DifficultyButton"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DifficultyButton"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -99,18 +113,19 @@ anchor_bottom = 1.0
 margin_left = -52.0
 margin_top = -8.0
 margin_right = 52.0
+margin_bottom = 8.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EasyButton" type="TextureButton" parent="VBoxContainer/DifficultyButton/HBoxContainer"]
+[node name="EasyButton" type="TextureButton" parent="DifficultyButton/HBoxContainer"]
 margin_right = 32.0
 margin_bottom = 16.0
 texture_normal = ExtResource( 11 )
 texture_focused = ExtResource( 12 )
 script = ExtResource( 16 )
 
-[node name="NormalButton" type="TextureButton" parent="VBoxContainer/DifficultyButton/HBoxContainer"]
+[node name="NormalButton" type="TextureButton" parent="DifficultyButton/HBoxContainer"]
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 16.0
@@ -120,7 +135,7 @@ script = ExtResource( 16 )
 difficulty_level = 1
 is_selected = true
 
-[node name="HardButton" type="TextureButton" parent="VBoxContainer/DifficultyButton/HBoxContainer"]
+[node name="HardButton" type="TextureButton" parent="DifficultyButton/HBoxContainer"]
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 16.0
@@ -128,14 +143,6 @@ texture_normal = ExtResource( 14 )
 texture_focused = ExtResource( 10 )
 script = ExtResource( 16 )
 difficulty_level = 2
-
-[node name="HowToButton" type="TextureButton" parent="VBoxContainer"]
-margin_top = 72.0
-margin_right = 128.0
-margin_bottom = 104.0
-texture_normal = ExtResource( 8 )
-texture_focused = ExtResource( 7 )
-script = ExtResource( 33 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
@@ -218,7 +225,7 @@ __meta__ = {
 [node name="TutorialImage" type="AnimatedSprite" parent="TutorialScreen"]
 position = Vector2( 160, 90 )
 frames = ExtResource( 34 )
-frame = 14
+frame = 15
 playing = true
 
 [node name="BackButton" type="TextureButton" parent="TutorialScreen"]

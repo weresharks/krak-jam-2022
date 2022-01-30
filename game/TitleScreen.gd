@@ -1,9 +1,7 @@
 extends Control
 
+export (Array, Texture) var monsters
 
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	if Global.high_score > 0:
 		$HighScore/high_score.text = str(Global.high_score)
@@ -13,3 +11,7 @@ func _ready():
 		$HighScore/score.text = str(Global.last_game_score)
 		$HighScore/label_score.show()
 		$HighScore/score.show()
+		
+		randomize()
+		var monster = monsters[randi() % monsters.size()]
+		$Monster.texture = monster

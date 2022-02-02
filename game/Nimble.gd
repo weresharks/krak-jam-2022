@@ -138,6 +138,9 @@ func _process(delta):
 	
 	apply_goal_modulation()
 	apply_motion_animation(velocity)
+	
+	$Particles2D.process_material.set_shader_param("nimble_pos", position)
+	$Particles2D.process_material.set_shader_param("tank_pos", tank.position)
 
 func _set_goal_volume(volume_db: float):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Goal"), volume_db)
